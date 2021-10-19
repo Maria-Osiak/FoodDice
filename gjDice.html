@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FoodDice</title>
+    <!--
+    <script src="script.js" defer></script>
+    -->
+    <style>
+        body {
+            margin: 0px;
+            height: 100vh;
+            width: 100vw;
+            font-family: sans-serif;
+            background: rgba(20,20,20,1);
+            position: fixed;
+        }
+        #background {
+            background: lightgrey;
+            height: 100vh;
+
+        }
+
+        /*---- page-containers ----*/
+        #main_wrapper {
+            height: 100%;
+
+        }
+        #side_bar {
+            position: absolute;
+            background: #eee;
+        }
+        #main_container {
+            height: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #rollButton {
+            z-index: 1;
+            width: 180px;
+            height: 180px;
+            opacity: 1;
+            background: #2f2;
+        }
+        /*---- page-containers ----*/
+
+
+        /*---- paragraphs ----*/
+        .h1 {
+            font: bold 2em Arial;
+        }
+        .h2 {
+            font: bold 1.5em Arial;
+            margin-bottom: 15px;
+        }
+        .h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        /*---- paragraphs ----*/
+
+
+        /*---- side_bar ----*/
+        #logo > img {
+            width: 40%;
+        }
+        .link {
+            display: flex;
+            background: none;
+            border: none;
+            text-decoration: none;
+            color: #777;
+            font-family: inherit;
+            font-size: inherit;
+            cursor: pointer;
+            padding: 5px;
+            width: 100%;
+        }
+        .link:hover {
+            color: black;
+        }
+        .dropdown-menu {
+            z-index: 5;     /*for å vise menyene over alt av innhold på viewporten*/
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 300px;
+            height: 300px;
+            max-height: 300px;
+            background: #fff;
+            padding: .5rem;
+            border-radius: .25rem;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-250px);
+            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
+        }
+        .dropdown.active > .link + .dropdown-menu {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .drop-inf {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-column-gap: 10px;
+        }
+        .inf {
+            display: flex;
+            flex-direction: column;
+        }
+        .drop-h {
+            border-bottom: 1px solid grey;
+        }
+        /*---- side_bar ----*/
+
+
+        /*---- Suggestion ----*/
+        .suggestion {
+            z-index: 5;
+            position: absolute;
+            width: 90vw;
+            height: 90vh;
+            max-height: 90vh;
+            background: #fff;
+            padding: .5rem;
+            border-radius: .25rem;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(250px);
+            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
+        }
+        .suggestion.active {
+            opacity: 1;
+            display: inline-block;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .suggestonDiv {
+            #width: inherit;
+            #height: inherit;
+        }
+        /*---- Suggestion ----*/
+
+
+        /*---- close-button ----*/
+        .close {
+            float: right;
+            display: inline-block;
+            padding: 2px 5px;
+            background: #ccc;
+            height: 23px;
+            width: 23px;
+            border-radius: 5px;
+        }
+        .close:hover {
+            float: right;
+            display: inline-block;
+            padding: 2px 5px;
+            background: #999;
+            color: #fff;
+        }
+        /*---- close-button ----*/
+    </style>
+</head>
+<body>
+<div id="background">
+    <div id="main_wrapper">
+        <div id="side_bar">
+            <!--<img id="logo" src="FoodDiceLogo2.png" alt="Logo">-->
+            <div class="dropdown" data-dropdown>    <!-- data-tag "data-dropdown" -->
+                <button class="link" data-dropdown-button>Filter</button>
+                <div class="dropdown-menu">
+                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
+                    <div class="h2">Select options to filter out</div>
+                    <div class="info-grid">
+                        <div>
+                            <div class="drop-h h3">Vegeterian</div>
+                            <div class="drop-inf">
+                                <label for="meat">Red meat</label>
+                                <input type="checkbox" id="meat" name="meat">
+                                <label for="chicken">Poultry</label>
+                                <input type="checkbox" id="chicken" name="chicken">
+                                <label for="fish">Fish</label>
+                                <input type="checkbox" id="fish" name="fish">
+                                <label for="egg">Egg</label>
+                                <input type="checkbox" id="egg" name="egg">
+                                <label for="milk">Dairy</label>
+                                <input type="checkbox" id="milk" name="milk">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="drop-h h3">Allergies</div>
+                            <div class="drop-inf">
+                                <label for="gluten">Gluten</label>
+                                <input type="checkbox" id="gluten" name="gluten">
+                                <label for="2">option2</label>
+                                <input type="checkbox" id="2" name="2">
+                                <label for="3">option3</label>
+                                <input type="checkbox" id="3" name="3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown" data-dropdown>
+                <button class="link" data-dropdown-button>Settings</button>
+                <div class="dropdown-menu">
+                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
+                    <div class="h2">Settings</div>
+                    <div class="info-grid">
+                        <div>
+                            <div class="drop-h h3">Language</div>
+                            <div class="drop-inf">
+                                <label for="eng">English</label>
+                                <input type="radio" id="eng" name="lang" value="eng" checked>
+                                <label for="no">Norwegian</label>
+                                <input type="radio" id="no" name="lang" value="no">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="drop-h h3">option2</div>
+                            <div class="drop-inf">
+                                <label for="o2"></label>
+                                <input type="checkbox" id="o2">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="drop-h h3">option3</div>
+                            <div class="drop-inf">
+                                <label for="o3"></label>
+                                <input type="checkbox" id="o3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="dropdown" data-dropdown>
+                <button class="link" data-dropdown-button>Favorites</button>
+                <div class="dropdown-menu">
+                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
+                    <div class="drop-h h3">Favorites</div>
+                    <div class="info-grid">
+                        <div>
+                            <div class="inf">
+                                <a href="#">Spagetti</a>
+                                <a href="#">Soup</a>
+                                <a href="#">Pizza</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="dropdown" data-dropdown>
+                <button class="link" data-dropdown-button>Log</button>
+                <div class="dropdown-menu">
+                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
+                    <div class="drop-h h2">Log</div>
+                    <div class="inf">
+                        <div class="log-log">
+                            <!-- tomt element -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main_container">
+            <button class="link" id="rollButton" onclick="roll()">
+                <!--A dice-->
+                A dice
+            </button>
+            <div class="suggestion" data-dropdown>
+                <button class="link close" onclick="this.parentNode.classList.remove('active')">X</button>
+                <div id="suggestion">
+                    test
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("click", e => {
+        const isDropdownButton = e.target.matches("[data-dropdown-button]")
+        if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return
+
+        //holder den aktive siden åpen
+        let currentDropdown
+        if (isDropdownButton) {
+            currentDropdown = e.target.closest("[data-dropdown]")
+            currentDropdown.classList.toggle('active')
+        }
+
+        //lukker alle andre menyer
+        document.querySelectorAll("[data-dropdown].active").forEach(dropdown => {
+            if (dropdown === currentDropdown) return
+            dropdown.classList.remove('active')
+        })
+    })  //slutt på addEventListener
+
+
+    //generates a random number, without immediate repeat
+    let previousNumber = 0;
+    let rolling = false     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
+
+    function roll() {
+        if (rolling === false) {
+            rolling = true
+            let numberX = Math.floor(Math.random() * 11)
+            if (numberX == previousNumber) {
+                numberX = Math.floor(Math.random() * 11)
+                //console.log(numberX, "reroll");
+                showMenu(numberX);
+            } else {
+                previousNumber = numberX
+                //console.log(numberX);
+                showMenu(numberX);
+            }
+        }
+    }
+
+    function showMenu(numberX) {
+        //console.log(numberX, "recived");
+        let jsonUrl = "Suggestions/" + numberX +".json";
+        let suggestionMenu = document.getElementById("suggestion");
+
+        //JSON = JavaScript Object Notations
+        fetch(jsonUrl)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            suggestionMenu.innerText = data.titel
+            suggestionMenu.parentNode.classList.toggle('active')
+            rolling = false
+        })
+        .catch(function (err) {
+	    console.warn('Something went wrong.', err);
+        });
+        rolling = false
+    }
+
+</script>
+</body>
+</html>
