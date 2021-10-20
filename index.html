@@ -9,21 +9,17 @@
         body {
             margin: 0px;
             height: 100vh;
-            width: 100vw;
             font-family: sans-serif;
             background: rgba(20,20,20,1);
         }
         #background {
             background: lightgrey;
-            height: inherit;
-            width: inherit;
-
         }
 
         /*---- page-containers ----*/
         #main_wrapper {
-            height: 99%;
-            width: 99%;
+            height: 100vh;
+            width: 100vw;
         }
         #side_bar {
             position: absolute;
@@ -138,9 +134,8 @@
             overflow: visible;
             z-index: 5;
             position: absolute;
-            width: 90vw;
-            #height: 90vh;
-            max-height: 90vh;
+            width: 80%;
+            top: 1rem;
             background: #fff;
             padding: .5rem;
             border-radius: .25rem;
@@ -156,8 +151,51 @@
             transform: translateY(0);
             pointer-events: auto;
         }
-        .suggestion > img {
+        .suggestionRow {
+            padding: .5rem;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .Line {
+            border-bottom: 1px solid grey;
+        }
+        .sBilde {
+            max-height: 50vh;
+            max-width: 100%;
+            padding: .5rem;
+            border-radius: .25rem;
+            background: #ddd;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+        }
+        .sLinks {
+            max-width: 500px;
+            padding: .5rem;
+            border-radius: .25rem;
+            background: #ddd;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            transition: background .1s ease-in-out;
+        }
+        .sLinks:hover {
+            background: #aaa;
+        }
+        .sLinkContent {
+            height: 100%;
+            width: 100%;
+            border-radius: .25rem;
+            background: #eee;
+            cursor: pointer;
+
+        }
+        .noLinkDecor {
+            text-decoration: none;
+            color: #000;
+        }
+        .linkBilde {
             width: 50%;
+            margin-right: 10px;
+            float: left;
         }
         /*---- Suggestion ----*/
 
@@ -300,14 +338,29 @@
             </button>
             <div class="suggestion" data-dropdown>
                 <button class="link close" onclick="this.parentNode.classList.remove('active')">X</button>
-                <h2 id="suggestion">
-                    test
-                </h2>
-                <div>
-                    <img id="suggestionImg" src="" alt="">
-                    <div id="suggestionText"></div>
+                <h2 id="suggestion"></h2>
+                <div class="suggestionRow Line">
+                    <img id="sImg" class="sBilde" src="" alt="Bilde av matrett">
                 </div>
 
+                <div class="suggestionRow">
+                    <div class="sLinks">
+                        <a href="" id="sLink1" target="_blank" class="noLinkDecor">
+                            <div class="sLinkContent">
+                                <img id="sLink1Img" class="linkBilde" src="" alt="">
+                                <div id="sLink1Text" class="h3"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="sLinks">
+                        <a href="" id="sLink2" target="_blank" class="noLinkDecor">
+                            <div class="sLinkContent">
+                                <img id="sLink2Img" class="linkBilde" src="" alt="">
+                                <div id="sLink2Text" class="h3"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -340,16 +393,16 @@
     function roll() {
         if (rolling === false) {
             rolling = true
-            let numberX = Math.floor(Math.random() * 3) //normalt 11
+            let numberX = Math.floor(Math.random() * 11) //normalt 11
             if (numberX == previousNumber) {
-                numberX = Math.floor(Math.random() * 3) //normalt 11
+                numberX = Math.floor(Math.random() * 11) //normalt 11
                 previousNumber = numberX
                 //console.log(numberX, "reroll");
-                setTimeout(showMenu(numberX), 3000);
+                showMenu(numberX);
             } else {
                 previousNumber = numberX
                 //console.log(numberX);
-                setTimeout(showMenu(numberX), 3000);
+                showMenu(numberX);
             }
         }
     }
@@ -357,19 +410,33 @@
     function showMenu(numberX) {
         //console.log(numberX, "recived");
         let jsonUrl = "Suggestions/" + numberX +".json";
-        let suggestionMenu = document.getElementById("suggestion");
-        let suggestionImg = document.getElementById("suggestionImg");
-        let suggestionText = document.getElementById("suggestionText");
+        let sMenu = document.getElementById("suggestion");
+        let sImg = document.getElementById("sImg");
+        let sLink1 = document.getElementById("sLink1");
+        let sLink1Text = document.getElementById("sLink1Text");
+        let sLink1Img = document.getElementById("sLink1Img");
+
+        let sLink2 = document.getElementById("sLink2");
+        let sLink2Text = document.getElementById("sLink2Text");
+        let sLink2Img = document.getElementById("sLink2Img");
 
         //JSON = JavaScript Object Notations
         fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            suggestionMenu.innerText = data.titel
-            suggestionImg.src = data.img
+            sMenu.innerText = data.titel
+            sImg.src = data.img
 
-            suggestionMenu.parentNode.classList.toggle('active')
+            sLink1.href = data.link1
+            sLink1Img.src = data.link1Img
+            sLink1Text.innerText = data.link1Text
+
+            sLink2.href = data.link2
+            sLink2Img.src = data.link2Img
+            sLink2Text.innerText = data.link2Text
+
+            sMenu.parentNode.classList.toggle('active')
             rolling = false
         })
         .catch(function (err) {

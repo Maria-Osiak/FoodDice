@@ -1,4 +1,10 @@
 {
-  "titel": "Dette er suggestion 0",
-  "img": "https://patelfarmfresh.com/wp-content/uploads/2020/11/Orange.jpg"
+  "titel": "Lasagna",
+  "img": "/Suggestions/img/lasagna.jpg",
+  "link1": "https://www.matprat.no/oppskrifter/familien/lasagne/",
+  "link1Text": "Recipe from MatPrat.no",
+  "link1Img": "https://images.matprat.no/qzkyataqzn-jumbotron/mobile",
+  "link2": "https://www.tine.no/oppskrifter/middag-og-hovedretter/pasta-og-ris/lasagne",
+  "link2Text": "Recipe from Tine.no",
+  "link2Img": "https://www.tine.no/_/recipeimage/w_768%2Ch_432%2Cc_fill%2Cx_2145%2Cy_1207%2Cg_xy_center/recipeimage/h7qqtrjqw3l54mrvjdif.jpg"
 }
