@@ -3,8 +3,8 @@
   "img": "https://www.ingredion.com/content/dam/ingredion/usca-images/food/meat/cheeseburger-bread_720x560.jpg",
   "link1": "https://www.matprat.no/oppskrifter/familien/hamburger/?gclid=CjwKCAjw_L6LBhBbEiwA4c46unB-wsGapIPE-0EhrpX1HynCLUX9Il_TZ-Y7EbK2rtTfsPIEpW_LeRoC-UQQAvD_BwE&gclsrc=aw.ds",
   "link1Img": "https://images.matprat.no/53zncmujla-jumbotron/large",
-  "link1Text": "Oppskrift fra Matprat.no",
-  "link2": "",
-  "link2Img": "",
-  "link2Text": "Oppskrift fra Matprat.no"
+  "link1Text": "Recipe from Matprat.no",
+  "link2": "https://meny.no/oppskrifter/hamburger/hjemmelaget-hamburger/",
+  "link2Img": "/Suggestions/img/hamburgerMeny.png",
+  "link2Text": "Recipe from Meny.no"
 }
