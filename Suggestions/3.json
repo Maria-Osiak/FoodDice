@@ -1,3 +1,10 @@
 {
-  "titel":"Dette er suggestion 3"
+  "titel":"Taco",
+  "img": "https://res.cloudinary.com/norgesgruppen/image/upload/c_fill,f_auto,g_center,h_750,q_auto:eco,w_1920/vnwafzemrsocawlpnvus.jpg",
+  "link1": "https://www.matprat.no/oppskrifter/familien/taco/",
+  "link1Img": "https://images.matprat.no/2db4ghzuz4-jumbotron/large",
+  "link1Text": "Oppskrift fra Matprat.no",
+  "link2": "",
+  "link2Img": "",
+  "link2Text": "Oppskrift fra Matprat.no"
 }

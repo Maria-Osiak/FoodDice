@@ -1,3 +1,10 @@
 {
-  "titel":"Dette er suggestion 4"
+  "titel":"Pasta carbonara",
+  "img": "https://www.rema.no/remacommerceapi/v2/rema/media/convert/remaProductCatalog/Online/REC-59519-Rema1000-27-april-16-web34012_crop_34638_tif?w=1280&q=75",
+  "link1": "https://www.tine.no/oppskrifter/middag-og-hovedretter/pasta-og-ris/pasta-carbonara",
+  "link1Img": "https://www.tine.no/_/recipeimage/w_1600%2Ch_900%2Cc_fill%2Cx_1500%2Cy_1101%2Cg_xy_center/recipeimage/333113.jpg",
+  "link1Text": "Oppskrift fra Tine.no",
+  "link2": "",
+  "link2Img": "",
+  "link2Text": "Oppskrift fra Tine.no"
 }

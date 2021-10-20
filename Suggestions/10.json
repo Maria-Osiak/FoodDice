@@ -1,3 +1,10 @@
 {
-  "titel":"Dette er suggestion 10"
+  "titel":"Pizza pepperoni",
+  "img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_1600/tbagzeanc4qhrnlanzgi/pizza-med-pepperoni",
+  "link1": "https://www.tine.no/oppskrifter/middag-og-hovedretter/pizza-og-pai/pepperonipizza",
+  "link1Img": "https://www.tine.no/_/recipeimage/w_1600%2Ch_900%2Cc_fill%2Cx_1500%2Cy_939%2Cg_xy_center/recipeimage/261953.jpg",
+  "link1Text": "Oppskrift fra Matprat.no",
+  "link2": "",
+  "link2Img": "",
+  "link2Text": "Oppskrift fra Tine.no"
 }
