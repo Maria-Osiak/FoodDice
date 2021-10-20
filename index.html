@@ -340,9 +340,9 @@
     function roll() {
         if (rolling === false) {
             rolling = true
-            let numberX = Math.floor(Math.random() * 3) //normalt 11
+            let numberX = Math.floor(Math.random() * 11) //normalt 11
             if (numberX == previousNumber) {
-                numberX = Math.floor(Math.random() * 3) //normalt 11
+                numberX = Math.floor(Math.random() * 11) //normalt 11
                 previousNumber = numberX
                 //console.log(numberX, "reroll");
                 setTimeout(showMenu(numberX), 3000);
