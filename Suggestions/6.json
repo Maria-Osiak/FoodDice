@@ -1,4 +1,10 @@
 {
   "titel":"Nachos",
-  "img": "https://images.matprat.no/82l67ptgrz-normal/710"
+  "img": "https://images.matprat.no/82l67ptgrz-normal/710",
+  "link1": "https://www.matprat.no/oppskrifter/kos/nachos/",
+  "link1Img": "https://images.matprat.no/82l67ptgrz-jumbotron/large",
+  "link1Text": "Oppskrift fra Matprat.no",
+  "link2": "",
+  "link2Img": "",
+  "link2Text": "Oppskrift fra Matprat.no"
 }
