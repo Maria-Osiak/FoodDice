@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FoodDice</title>
-    <!--
-    <script src="script.js" defer></script>
-    -->
     <style>
         body {
             margin: 0px;
@@ -15,18 +12,18 @@
             width: 100vw;
             font-family: sans-serif;
             background: rgba(20,20,20,1);
-            position: fixed;
         }
         #background {
             background: lightgrey;
-            height: 100vh;
+            height: inherit;
+            width: inherit;
 
         }
 
         /*---- page-containers ----*/
         #main_wrapper {
-            height: 100%;
-
+            height: 99%;
+            width: 99%;
         }
         #side_bar {
             position: absolute;
@@ -34,6 +31,7 @@
         }
         #main_container {
             height: inherit;
+            width: inherit;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -44,7 +42,7 @@
             width: 180px;
             height: 180px;
             opacity: 1;
-            background: #2f2;
+            background: #eee;
         }
         /*---- page-containers ----*/
 
@@ -55,17 +53,17 @@
         }
         .h2 {
             font: bold 1.5em Arial;
-            margin-bottom: 15px;
         }
         .h3 {
             margin-top: 0;
             margin-bottom: 10px;
             font-size: 1.3em;
+            border-bottom: 1px solid grey;
         }
         /*---- paragraphs ----*/
 
 
-        /*---- side_bar ----*/
+        /*---- DropdownMenu ----*/
         #logo > img {
             width: 40%;
         }
@@ -84,16 +82,18 @@
         .link:hover {
             color: black;
         }
+        .dropdown {
+            width:100%;
+        }
         .dropdown-menu {
-            z-index: 5;     /*for å vise menyene over alt av innhold på viewporten*/
+            z-index: 5;
             position: absolute;
             left: 0;
             top: 1rem;
-            width: 300px;
-            height: 300px;
-            max-height: 300px;
+            width: 80vw;
+            max-width: 440px;
             background: #fff;
-            padding: .5rem;
+            padding: .25rem;
             border-radius: .25rem;
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
             opacity: 0;
@@ -106,32 +106,40 @@
             transform: translateX(0);
             pointer-events: auto;
         }
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+        .menuTop {
+            background: #eee;
+            padding: .5rem;
+            border-radius: .25rem;
+            margin-bottom: 5px;
         }
-        .drop-inf {
+        .menuRow {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .menuDivi {
+            padding: .25rem;
+            border-radius: .25rem;
+            width: 80vw;
+            max-width: 200px;
+            background: #eee;
+        }
+        .dropMenuInf {
             display: grid;
             grid-template-columns: 1fr auto;
             grid-column-gap: 10px;
         }
-        .inf {
-            display: flex;
-            flex-direction: column;
-        }
-        .drop-h {
-            border-bottom: 1px solid grey;
-        }
-        /*---- side_bar ----*/
+        /*---- DropdownMenu ----*/
 
 
         /*---- Suggestion ----*/
         .suggestion {
+            overflow: visible;
             z-index: 5;
             position: absolute;
             width: 90vw;
-            height: 90vh;
+            #height: 90vh;
             max-height: 90vh;
             background: #fff;
             padding: .5rem;
@@ -148,9 +156,8 @@
             transform: translateY(0);
             pointer-events: auto;
         }
-        .suggestonDiv {
-            #width: inherit;
-            #height: inherit;
+        .suggestion > img {
+            width: 50%;
         }
         /*---- Suggestion ----*/
 
@@ -183,12 +190,15 @@
             <div class="dropdown" data-dropdown>    <!-- data-tag "data-dropdown" -->
                 <button class="link" data-dropdown-button>Filter</button>
                 <div class="dropdown-menu">
-                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
-                    <div class="h2">Select options to filter out</div>
-                    <div class="info-grid">
-                        <div>
-                            <div class="drop-h h3">Vegeterian</div>
-                            <div class="drop-inf">
+                    <div class="menuTop">
+                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
+                        <div class="h2">Filters</div>
+                        <div>Select what to filer out:</div>
+                    </div>
+                    <div class="menuRow">
+                        <div class="menuDivi">
+                            <div class="h3">Vegeterian</div>
+                            <div class="dropMenuInf">
                                 <label for="meat">Red meat</label>
                                 <input type="checkbox" id="meat" name="meat">
                                 <label for="chicken">Poultry</label>
@@ -201,9 +211,9 @@
                                 <input type="checkbox" id="milk" name="milk">
                             </div>
                         </div>
-                        <div>
-                            <div class="drop-h h3">Allergies</div>
-                            <div class="drop-inf">
+                        <div class="menuDivi">
+                            <div class="h3">Allergies</div>
+                            <div class="dropMenuInf">
                                 <label for="gluten">Gluten</label>
                                 <input type="checkbox" id="gluten" name="gluten">
                                 <label for="2">option2</label>
@@ -218,28 +228,30 @@
             <div class="dropdown" data-dropdown>
                 <button class="link" data-dropdown-button>Settings</button>
                 <div class="dropdown-menu">
-                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
-                    <div class="h2">Settings</div>
-                    <div class="info-grid">
-                        <div>
-                            <div class="drop-h h3">Language</div>
-                            <div class="drop-inf">
+                    <div class="menuTop">
+                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
+                        <div class="h2">Settings</div>
+                    </div>
+                    <div class="menuRow">
+                        <div class="menuDivi">
+                            <div class="h3">Language</div>
+                            <div class="dropMenuInf">
                                 <label for="eng">English</label>
                                 <input type="radio" id="eng" name="lang" value="eng" checked>
                                 <label for="no">Norwegian</label>
                                 <input type="radio" id="no" name="lang" value="no">
                             </div>
                         </div>
-                        <div>
-                            <div class="drop-h h3">option2</div>
-                            <div class="drop-inf">
+                        <div class="menuDivi">
+                            <div class="h3">option2</div>
+                            <div class="dropMenuInf">
                                 <label for="o2"></label>
                                 <input type="checkbox" id="o2">
                             </div>
                         </div>
-                        <div>
-                            <div class="drop-h h3">option3</div>
-                            <div class="drop-inf">
+                        <div class="menuDivi">
+                            <div class="h3">option3</div>
+                            <div class="dropMenuInf">
                                 <label for="o3"></label>
                                 <input type="checkbox" id="o3">
                             </div>
@@ -250,11 +262,14 @@
             <!--<div class="dropdown" data-dropdown>
                 <button class="link" data-dropdown-button>Favorites</button>
                 <div class="dropdown-menu">
-                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
-                    <div class="drop-h h3">Favorites</div>
-                    <div class="info-grid">
-                        <div>
-                            <div class="inf">
+                    <div class="dropdown-menu">
+                    <div class="menuTop">
+                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
+                        <div class="h2">Favorites</div>
+                    </div>
+                    <div class="menuRow">
+                        <div class="menuDivi">
+                            <div class="dropMenuInf">
                                 <a href="#">Spagetti</a>
                                 <a href="#">Soup</a>
                                 <a href="#">Pizza</a>
@@ -266,8 +281,10 @@
             <div class="dropdown" data-dropdown>
                 <button class="link" data-dropdown-button>Log</button>
                 <div class="dropdown-menu">
-                    <button class="link close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
-                    <div class="drop-h h2">Log</div>
+                    <div class="menuTop">
+                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
+                        <div class="h2">Log</div>
+                    </div>
                     <div class="inf">
                         <div class="log-log">
                             <!-- tomt element -->
@@ -279,13 +296,15 @@
         <div id="main_container">
             <button class="link" id="rollButton" onclick="roll()">
                 <!--A dice-->
-                A dice
+                "A dice"
             </button>
             <div class="suggestion" data-dropdown>
                 <button class="link close" onclick="this.parentNode.classList.remove('active')">X</button>
-                <div id="suggestion">
+                <h2 id="suggestion">
                     test
-                </div>
+                </h2>
+                <img id="suggestionImg" src="" alt="">
+                <div id="suggestionText"></div>
             </div>
         </div>
     </div>
@@ -318,15 +337,16 @@
     function roll() {
         if (rolling === false) {
             rolling = true
-            let numberX = Math.floor(Math.random() * 11)
+            let numberX = Math.floor(Math.random() * 3) //normalt 11
             if (numberX == previousNumber) {
-                numberX = Math.floor(Math.random() * 11)
+                numberX = Math.floor(Math.random() * 3) //normalt 11
+                previousNumber = numberX
                 //console.log(numberX, "reroll");
-                showMenu(numberX);
+                setTimeout(showMenu(numberX), 3000);
             } else {
                 previousNumber = numberX
                 //console.log(numberX);
-                showMenu(numberX);
+                setTimeout(showMenu(numberX), 3000);
             }
         }
     }
@@ -335,6 +355,8 @@
         //console.log(numberX, "recived");
         let jsonUrl = "Suggestions/" + numberX +".json";
         let suggestionMenu = document.getElementById("suggestion");
+        let suggestionImg = document.getElementById("suggestionImg");
+        let suggestionText = document.getElementById("suggestionText");
 
         //JSON = JavaScript Object Notations
         fetch(jsonUrl)
@@ -342,6 +364,8 @@
         .then(data => {
             console.log(data)
             suggestionMenu.innerText = data.titel
+            suggestionImg.src = data.img
+
             suggestionMenu.parentNode.classList.toggle('active')
             rolling = false
         })
