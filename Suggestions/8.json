@@ -1,10 +1,20 @@
 {
-  "titel":"Tomatsuppe",
+  "titel":"Tomato Soup",
   "img": "https://www.oppskriftskroken.no/wp-content/uploads/2017/07/Enkel-tomatsuppe.jpg",
+
   "link1": "https://www.tine.no/oppskrifter/middag-og-hovedretter/supper/tomatsuppe-med-yoghurt",
   "link1Img": "https://www.tine.no/_/recipeimage/w_1600%2Ch_900%2Cc_fill%2Cx_1500%2Cy_1000%2Cg_xy_center/recipeimage/320473.jpg",
-  "link1Text": "Oppskrift fra Tine.no",
-  "link2": "",
-  "link2Img": "",
-  "link2Text": "Oppskrift fra Tine.no"
+  "link1Text": "Recipe from Tine.no",
+
+  "link2": "https://www.matprat.no/oppskrifter/familien/tomatsuppe-med-kokt-egg/",
+  "link2Img": "https://images.matprat.no/unraqe5xjj-jumbotron/mobile",
+  "link2Text": "Recipe from Matprat.no",
+
+  "link3": "https://meny.no/oppskrifter/Supper/Hjemmelaget-tomatsuppe/",
+  "link3Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_650/h3iu0dtahtgpbwwitew7/hjemmelaget-tomatsuppe",
+  "link3Text": "Recipe from Meny.no",
+
+  "link4": "https://meny.no/oppskrifter/Supper/chunky-tomatsuppe-med-chili-og-basilikum/",
+  "link4Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/nupbrtfnuicvk4qgdezi/chunky-tomatsuppe-med-chili-og-basilikum",
+  "link4Text": "Recipe from Meny.no"
 }

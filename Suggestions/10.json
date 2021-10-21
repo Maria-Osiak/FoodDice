@@ -1,10 +1,20 @@
 {
-  "titel":"Pizza pepperoni",
-  "img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_1600/tbagzeanc4qhrnlanzgi/pizza-med-pepperoni",
+  "titel":"Pepperoni Pizza",
+  "img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_650/tbagzeanc4qhrnlanzgi/pizza-med-pepperoni",
+
   "link1": "https://www.tine.no/oppskrifter/middag-og-hovedretter/pizza-og-pai/pepperonipizza",
   "link1Img": "https://www.tine.no/_/recipeimage/w_1600%2Ch_900%2Cc_fill%2Cx_1500%2Cy_939%2Cg_xy_center/recipeimage/261953.jpg",
-  "link1Text": "Oppskrift fra Matprat.no",
-  "link2": "",
-  "link2Img": "",
-  "link2Text": "Oppskrift fra Tine.no"
+  "link1Text": "Recipe from Tine.no",
+
+  "link2": "https://www.rema.no/oppskrifter/pizza/pizza-med-pepperoni/",
+  "link2Img": "https://wwwremaprodstorage.blob.core.windows.net/sys-master-hyb-prod/hb6/hba/8824276615198/rec_35916_pizzamargherita_pepperoni_crop_40157_tif_w1280hq75",
+  "link2Text": "Recipe from Rema.no",
+
+  "link3": "https://meny.no/oppskrifter/pizza/pizza-med-pepperoni/",
+  "link3Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_650/tbagzeanc4qhrnlanzgi/pizza-med-pepperoni",
+  "link3Text": "Recipe from Meny.no",
+
+  "link4": "https://www.gilde.no/oppskrifter/pizza-med-pepperoni-og-skinke",
+  "link4Img": "https://www.gilde.no/imager/images/15965/Pepperoni-skinke-pizza-44738_1-1_0eac3682caf636836629cea34f00166a.jpg",
+  "link4Text": "Recipe from Gilde.no"
 }

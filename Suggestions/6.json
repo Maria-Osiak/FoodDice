@@ -1,10 +1,20 @@
 {
   "titel":"Nachos",
   "img": "https://images.matprat.no/82l67ptgrz-normal/710",
-  "link1": "https://www.matprat.no/oppskrifter/kos/nachos/",
-  "link1Img": "https://images.matprat.no/82l67ptgrz-jumbotron/large",
-  "link1Text": "Oppskrift fra Matprat.no",
-  "link2": "",
-  "link2Img": "",
-  "link2Text": "Oppskrift fra Matprat.no"
+
+  "link1": "https://www.tine.no/oppskrifter/middag-og-hovedretter/kjott/nachos-med-enkel-guacamole",
+  "link1Img": "https://www.tine.no/_/recipeimage/w_640%2Ch_360%2Cc_fill%2Cx_1500%2Cy_1300%2Cg_xy_center/recipeimage/353496.jpg",
+  "link1Text": "Recipe from Tine.no",
+
+  "link2": "https://www.matprat.no/oppskrifter/kos/nachos/",
+  "link2Img": "https://images.matprat.no/82l67ptgrz-jumbotron/large",
+  "link2Text": "Recipe from Matprat.no",
+
+  "link3": "https://meny.no/oppskrifter/taco/loaded-nachos/",
+  "link3Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/hyraltjqggh0bbc49ewg/loaded-nachos",
+  "link3Text": "Recipe from Meny.no",
+
+  "link4": "https://www.godt.no/oppskrift/8093/nachos-med-frisk-salsa",
+  "link4Img": "https://imbo.vgc.no/users/godt/images/0b993b43dbae2c349c96d8dd4c6a26c7?t%5B%5D=thumbnail%3Awidth%3D700%2Cheight%3D393.75%2Cfit%3Doutbound&t%5B%5D=strip&t%5B%5D=compress%3Alevel%3D75&t%5B%5D=progressive&accessToken=ba4564e53b56cbb031e54efa435d94d4a4506960432a8cdf1a1b48813847e861",
+  "link4Text": "Recipe from godt.no"
 }
