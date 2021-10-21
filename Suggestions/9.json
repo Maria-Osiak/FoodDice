@@ -1,10 +1,20 @@
 {
   "titel":"Pad Thai",
   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Phat_Thai_kung_Chang_Khien_street_stall.jpg/1200px-Phat_Thai_kung_Chang_Khien_street_stall.jpg",
+
   "link1": "https://www.matprat.no/oppskrifter/gjester/pad-thai---stekte-nudler-med-svinekjott/",
   "link1Img": "https://images.matprat.no/zzx8umptpt-jumbotron/large",
-  "link1Text": "Oppskrift fra Matprat.no",
-  "link2": "",
-  "link2Img": "",
-  "link2Text": "Oppskrift fra Matprat.no"
+  "link1Text": "Recipe from Matprat.no",
+
+  "link2": "https://meny.no/oppskrifter/Pasta/Pad-thai/",
+  "link2Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/ksgq9rcaef0dkyxfc5dw/pad-thai-med-reker-og-tofu",
+  "link2Text": "Recipe from Meny.no",
+
+  "link3": "https://gladkokken.no/oppskrifter/pad-thai-en-klassisk-thailandsk-nuddelrett",
+  "link3Img": "https://gladkokken.imgix.net/DSC_0015-2.jpg?auto=compress%2Cformat&bg=%23FFFFFF&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.5&fp-y=0.5&h=394&q=90&w=700&s=cafdaa1a2e9cfdcc739333d2812f02e9",
+  "link3Text": "Recipe from Gladkokken.no",
+
+  "link4": "https://www.nrk.no/mat/pad-thai-1.15539873",
+  "link4Img": "https://gfx.nrk.no/jJVroQq_b3sZM0lxlsWeZQiCC1xoeIx2XsBM6QJlM1bQ.jpg",
+  "link4Text": "Recipe from Nrk.no"
 }

@@ -1,10 +1,20 @@
 {
-  "titel":"Pasta carbonara",
+  "titel":"Pasta Carbonara",
   "img": "https://www.rema.no/remacommerceapi/v2/rema/media/convert/remaProductCatalog/Online/REC-59519-Rema1000-27-april-16-web34012_crop_34638_tif?w=1280&q=75",
+
   "link1": "https://www.tine.no/oppskrifter/middag-og-hovedretter/pasta-og-ris/pasta-carbonara",
   "link1Img": "https://www.tine.no/_/recipeimage/w_1600%2Ch_900%2Cc_fill%2Cx_1500%2Cy_1101%2Cg_xy_center/recipeimage/333113.jpg",
-  "link1Text": "Oppskrift fra Tine.no",
-  "link2": "",
-  "link2Img": "",
-  "link2Text": "Oppskrift fra Tine.no"
+  "link1Text": "Recipe from Tine.no",
+
+  "link2": "https://meny.no/oppskrifter/Pasta/klassisk-pasta-carbonara/",
+  "link2Img": "https://res.cloudinary.com/norgesgruppen/image/upload/f_auto,q_auto:eco,dpr_1.0,w_280,h_212,c_fill/ol1owjx4oqyfeulp0yhc.jpg",
+  "link2Text": "Recipe from Meny.no",
+
+  "link3": "https://www.godt.no/oppskrift/8091/klassisk-pasta-carbonara",
+  "link3Img": "https://imbo.vgc.no/users/godt/images/0bbad7cb2269764ddf11fe2dc949bf9b?t%5B%5D=thumbnail%3Awidth%3D700%2Cheight%3D393.75%2Cfit%3Doutbound&t%5B%5D=strip&t%5B%5D=compress%3Alevel%3D75&t%5B%5D=progressive&accessToken=722ee04a065d47bcbd14eacb109e432bb1ec611da4cd3f56ae447dc50a100ff4",
+  "link3Text": "Recipe from godt.no",
+
+  "link4": "https://www.matprat.no/oppskrifter/kos/pasta-carbonara/",
+  "link4Img": "https://images.matprat.no/yd2ymkj8a4-related/mobile",
+  "link4Text": "Recipe from Matprat.no"
 }
