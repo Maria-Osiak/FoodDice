@@ -6,8 +6,9 @@
   "link1Img": "https://images.matprat.no/53zncmujla-jumbotron/large",
   "link1Text": "Recipe from Matprat.no",
 
-  "link2": "https://meny.no/oppskrifter/hamburger/hjemmelaget-hamburger/",
-  "link2Img": "https://maria-osiak.github.io/FoodDice/Suggestions/img/hamburgerMeny.png",
+
+  "link2": "https://meny.no/oppskrifter/vegetar/burger/saftig-vegetarburger-med-aioli/",
+  "link2Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/m80twccz8nzyzjt41nvx/saftig-vegetarburger-med-aioli",
   "link2Text": "Recipe from Meny.no",
 
   "link3": "https://meny.no/oppskrifter/hamburger/Hjemmelaget-burger-med-bacon-cheddarost-og-rodlok/",
