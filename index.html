@@ -17,6 +17,8 @@
         #main_wrapper {
             height: 100vh;
             width: 100vw;
+            overflow: hidden;
+            position: relative;
         }
         #side_bar {
             position: absolute;
@@ -47,6 +49,9 @@
         }
         .h2 {
             font: bold 1.5em Arial;
+        }
+        h2 {
+            margin: 10px 0px;
         }
         .h3 {
             margin-top: 0;
@@ -153,9 +158,7 @@
         .suggestionRow {
             padding: .5rem;
             display: flex;
-            flex-flow: row wrap;
             justify-content: center;
-            gap: 15px;
         }
         .Line {
             border-bottom: 1px solid grey;
@@ -164,9 +167,7 @@
         .sBilde {
             max-height: 50vh;
             max-width: 100%;
-            padding: .5rem;
             border-radius: .25rem;
-            background: #ddd;
             object-fit: cover;
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
         }
@@ -192,12 +193,6 @@
             text-decoration: none;
             color: #000;
         }
-        .linkBilde {
-            width: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-            float: left;
-        }
         .hidden {
             display: none;
         }
@@ -210,8 +205,8 @@
             display: inline-block;
             padding: 2px 5px;
             background: #ccc;
-            height: 23px;
-            width: 23px;
+            height: 30px;
+            width: 30px;
             border-radius: 5px;
         }
         .close:hover {
@@ -239,8 +234,11 @@
                     </div>
                     <div class="menuRow">
                         <div class="menuDivi">
-                            <div class="h3">Vegeterian</div>
+                            <div class="h3">Vegetarian</div>
                             <div class="dropMenuInf">
+                                <label for="vegetarian">Vegetarian</label>
+                                <input type="checkbox" id="vegetarian" name="vegetarian">
+                                <!--
                                 <label for="meat">Red meat</label>
                                 <input type="checkbox" id="meat" name="meat">
                                 <label for="chicken">Poultry</label>
@@ -251,6 +249,7 @@
                                 <input type="checkbox" id="egg" name="egg">
                                 <label for="milk">Dairy</label>
                                 <input type="checkbox" id="milk" name="milk">
+                                -->
                             </div>
                         </div>
                         <div class="menuDivi">
@@ -258,10 +257,12 @@
                             <div class="dropMenuInf">
                                 <label for="gluten">Gluten</label>
                                 <input type="checkbox" id="gluten" name="gluten">
+                                <!--
                                 <label for="2">option2</label>
                                 <input type="checkbox" id="2" name="2">
                                 <label for="3">option3</label>
                                 <input type="checkbox" id="3" name="3">
+                                -->
                             </div>
                         </div>
                     </div>
@@ -340,82 +341,61 @@
                 <!--A dice-->
                 "A dice"
             </button>
-            <div class="suggestion" data-dropdown>
+            <div id="sWindow" class="suggestion" data-dropdown>
                 <button class="link close" onclick="this.parentNode.classList.remove('active')">X</button>
-                <h2 id="suggestion"></h2>
-                <div class="suggestionRow Line">
-                    <img id="sImg" class="sBilde" src="" alt="Bilde av matrett">
-                </div>
-                <h3>Choose a recipe:</h3>
+                <h2 id="sTitle">Test</h2>
                 <div class="suggestionRow">
                     <div class="sLinks">
-                        <a href="" id="sLink1" target="_blank" class="noLinkDecor">
+                        <a href="" id="sLink" target="_blank" class="noLinkDecor">
                             <div class="sLinkContent">
-                                <img id="sLink1Img" class="linkBilde" src="" alt="">
-                                <div id="sLink1Text" class="h3"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sLinks">
-                        <a href="" id="sLink2" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sLink2Img" class="linkBilde" src="" alt="">
-                                <div id="sLink2Text" class="h3"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sLinks">
-                        <a href="" id="sLink3" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sLink3Img" class="linkBilde" src="" alt="">
-                                <div id="sLink3Text" class="h3"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sLinks">
-                        <a href="" id="sLink4" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sLink4Img" class="linkBilde" src="" alt="">
-                                <div id="sLink4Text" class="h3"></div>
+                                <img id="sImg" class="sBilde" src="" alt="Bilde av matrett">
+                                <div id="sText" class="h3"></div>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
+<!--language=JS-->
 <script>
+    //Opens menus
     document.addEventListener("click", e => {
         const isDropdownButton = e.target.matches("[data-dropdown-button]")
         if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return
 
-        //holder den aktive siden åpen
+        //holds the active menu open
         let currentDropdown
         if (isDropdownButton) {
             currentDropdown = e.target.closest("[data-dropdown]")
             currentDropdown.classList.toggle('active')
         }
 
-        //lukker alle andre menyer
+        //closes all other menus
         document.querySelectorAll("[data-dropdown].active").forEach(dropdown => {
             if (dropdown === currentDropdown) return
             dropdown.classList.remove('active')
         })
-    })  //slutt på addEventListener
+    })  //End of addEventListener
+    //EventListener er hentet fra Youtube
+    //Web Dev Simplified. (2021, 18. september). How To Create Advanced CSS Dropdown Menus. [Video]. YouTube. https://www.youtube.com/watch?v=S-VeYcOCFZw
+
 
 
     //generates a random number, without immediate repeat
     let previousNumber = 0;
-    let rolling = false     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
+    let rolling = true     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
+    let fetchData;
 
     function roll() {
         if (rolling === false) {
             rolling = true
-            let numberX = Math.floor(Math.random() * 11) //normalt 11
+            let numberX = Math.floor(Math.random() * 34)
             if (numberX == previousNumber) {
-                numberX = Math.floor(Math.random() * 11) //normalt 11
+                numberX = Math.floor(Math.random() * 34)
                 previousNumber = numberX
                 //console.log(numberX, "reroll");
                 showMenu(numberX);
@@ -428,60 +408,34 @@
     }
 
     function showMenu(numberX) {
-        //console.log(numberX, "recived");
-        let jsonUrl = "Suggestions/" + numberX +".json";
-        let sMenu = document.getElementById("suggestion");
+
+        let sWindow = document.getElementById("sWindow");
+        let sTitle = document.getElementById("sTitle");
+        let sLink = document.getElementById("sLink");
         let sImg = document.getElementById("sImg");
-        let sLink1 = document.getElementById("sLink1");
-        let sLink1Text = document.getElementById("sLink1Text");
-        let sLink1Img = document.getElementById("sLink1Img");
+        let sText = document.getElementById("sText");
 
-        let sLink2 = document.getElementById("sLink2");
-        let sLink2Text = document.getElementById("sLink2Text");
-        let sLink2Img = document.getElementById("sLink2Img");
+        sTitle.innerText = fetchData['Title' + numberX];
+        sLink.href = fetchData['Link' + numberX];
+        sImg.src = fetchData['Img' + numberX];
+        sText.innerText = fetchData['Text' + numberX];
 
-        let sLink3 = document.getElementById("sLink3");
-        let sLink3Text = document.getElementById("sLink3Text");
-        let sLink3Img = document.getElementById("sLink3Img");
+        setTimeout(function(){
+            sWindow.classList.toggle('active')
+            rolling = false
+        }, 1000);
+    }
 
-        let sLink4 = document.getElementById("sLink4");
-        let sLink4Text = document.getElementById("sLink4Text");
-        let sLink4Img = document.getElementById("sLink4Img");
-
-        //JSON = JavaScript Object Notations
-        fetch(jsonUrl)
+    fetch('Suggestions/All.json')
         .then(response => response.json())
         .then(data => {
-            //console.log(data)
-            sMenu.innerText = data.titel
-            sImg.src = data.img
-
-            sLink1.href = data.link1
-            sLink1Img.src = data.link1Img
-            sLink1Text.innerText = data.link1Text
-
-            sLink2.href = data.link2
-            sLink2Img.src = data.link2Img
-            sLink2Text.innerText = data.link2Text
-
-            sLink3.href = data.link3
-            sLink3Img.src = data.link3Img
-            sLink3Text.innerText = data.link3Text
-
-            sLink4.href = data.link4
-            sLink4Img.src = data.link4Img
-            sLink4Text.innerText = data.link4Text
-
-            setTimeout(function(){
-                sMenu.parentNode.classList.toggle('active')
-                rolling = false
-            }, 1000);
+            fetchData = data;
+            console.log(fetchData);
+            rolling = false
         })
         .catch(function (err) {
-	    console.warn('Something went wrong.', err);
+	        console.warn('Something went wrong.', err);
         });
-        rolling = false
-    }
 
 </script>
 </body>
