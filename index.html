@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,213 +7,214 @@
     <title>FoodDice</title>
     <style>
         body {
-            margin: 0px;
-            height: 100vh;
-            font-family: sans-serif;
-            background: lightgrey;
+            margin: 0px;                /*removes the automatic margin in body*/
+            height: 100vh;              /*make the body as high as the viewport*/
+            font-family: sans-serif;    /*set the font for the page*/
+            background-color: #AEEFFC;
         }
-
         /*---- page-containers ----*/
+        #background {
+            position: relative;
+            overflow: hidden;
+        }
         #main_wrapper {
             height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            position: relative;
-        }
-        #side_bar {
-            position: absolute;
-            background: #eee;
+            width: 100vw;               /*makes the wrapper 100% of viewport width*/
+            overflow: hidden;           /*hides child-elements that goes outside the border of this element*/
+            position: relative;         /*makes it possible to offset placement, relative to normal placement*/
         }
         #main_container {
-            height: inherit;
-            width: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        #rollButton {
-            z-index: 1;
-            width: 180px;
-            height: 180px;
-            opacity: 1;
-            pointer-events: auto;
-            background: #eee;
+            height: inherit;            /*inherit the height from parent*/
+            width: inherit;             /*inherit the width from parent*/
+            overflow: hidden;           /*hides child-elements that goes outside the border of this element*/
         }
         /*---- page-containers ----*/
 
 
-        /*---- paragraphs ----*/
-        .h1 {
-            font: bold 2em Arial;
+        .flex_center {
+            display: flex;              /*makes placement og child-elements flexible*/
+            align-items: center;        /*center child-elements vertically*/
+            justify-content: center;    /*center child-elements horizontally*/
         }
-        .h2 {
-            font: bold 1.5em Arial;
+        .whiteSquare {
+            z-index: 4;                 /*where on the z-axis the object is*/
+            position: absolute;         /*placement no longer follows the flow of other elements*/
+            height: 70px;
+            width: 110px;
+            background-color: #FFFFFF;
+            border-radius: 0 0 15px 0;  /*creates a rounded border in the bottom-right corner*/
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        h2 {
-            margin: 10px 0px;
+        .whiteSquare > img {
+            width: 80%;
+            display: block;
+            margin-top: 10px;
         }
-        .h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-            border-bottom: 1px solid grey;
-        }
-        /*---- paragraphs ----*/
 
-
-        /*---- DropdownMenu ----*/
-        #logo > img {
-            width: 40%;
+        .greySquare {
+            z-index: 3;                 /*where on the z-axis the element and child-elements is*/
+            position: absolute;
+            height: 115px;
+            width: 110px;
+            background-color: #F2F2F2;
+            border-radius: 0 0 15px 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        .link {
-            margin: .5rem 0;
+        #menuButtonContainer {
+            position: relative;         /*relative, so the container can be offset*/
+            top: 70px;                  /*moves container down 70 pixels*/
+            height: 45px;
+            width: 110px;
             display: flex;
+            font-family: ;
+            font-size: ;
+        }
+        #side_menu {
+            z-index: 3;
+            position: absolute;
+            height: 100vh;
+            width: 130px;
+            background-color: #F2F2F2;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            transform: translateX(-250px);   /*moves the element left*/
+            transition: transform 300ms ease-in-out; /*gives a smooth transition*/
+        }
+        #side_menu.active {
+            display: inline-block;
+            transform: translateX(0);
+        }
+        #side_menu > .container {
+            position: relative;
+            top: 80px;
+        }
+            #side_menu .close {
+            #position: relative;
+        }
+
+
+        #hint_box {
+            z-index: 2;
+            position: absolute;
+            height: 95vh;
+            max-height: 310px;
+            display: flex;
+        }
+        #info_square {
+            height: 80px;
+            width: 240px;
+            align-self: flex-end;       /*place the square at the bottom of the parent*/
+            border-radius: 25px;        /*rounded corners*/
+            background-color: #FFFFFFdd;
+            text-align: center;         /*center text horizontally*/
+        }
+        #dice {
+            z-index: 1;
+        }
+        #placeholder_dice {
+            height: 140px;
+            width: 140px;
+            background-color: #a0a0a0;
+        }
+
+
+        #light {
+            z-index: 1;
+            position: absolute;
+            border-radius: 50%;         /*50% makes the element a circle*/
+            filter: blur(15px);         /*blurs the element*/
+            height: 375px;
+            width: 375px;
+            background-color: #FCFCFC50;/*color with low opacity*/
+        }
+        #background_closeBox {
+            z-index: 0;
+            position: absolute;
+            height: inherit;
+            width: inherit;
+        }
+
+        .button {
+            position: absolute;
+            display: flex;
+            font-family: inherit;       /*inherit font from parent*/
+            font-size: inherit;
+            color: #777;                /*text-color in the button*/
+            background: none;           /*removes standard background*/
+            border: none;               /*removes standard border*/
+            text-decoration: none;      /*removes standard text-decoration*/
+            cursor: pointer;            /*cursor displays as a pointer when being hovered over*/
+            height: 100%;               /*make the button as high as the parent-element*/
+            width: 100%;                /*make the button as wide as the parent-element*/
+        }
+        .navButton {
+            font-family: inherit;
+            font-size: 20px;
             background: none;
             border: none;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
             text-decoration: none;
-            color: #777;
-            font-family: inherit;
-            font-size: inherit;
             cursor: pointer;
-            padding: 5px;
-            width: 100%;
+            height: 60px;
+            width: 130px;
+            text-align: center;
+            margin-top: 5px;
         }
-        .link:hover {
-            color: black;
+        .navButton:hover {
+            background-color: #6FCDF250;
         }
-        .dropdown {
-            width:100%;
+
+        .t1 {
+            font-size: 32px;            /*font-size for title 1*/
         }
-        .dropdown-menu {
+        .t2 {
+            font-size: 16px;            /*font-size for title 2*/
+        }
+        #sWindow {                      /*suggestionWindow*/
             z-index: 5;
             position: absolute;
-            left: 0;
-            top: 1rem;
-            width: 80vw;
-            max-width: 440px;
-            background: #fff;
-            padding: .25rem;
-            border-radius: .25rem;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(-250px);
-            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
-        }
-        .dropdown.active > .link + .dropdown-menu {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
-        }
-        .menuTop {
-            background: #eee;
-            padding: .5rem;
-            border-radius: .25rem;
-            margin-bottom: 5px;
-        }
-        .menuRow {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-        .menuDivi {
-            padding: .25rem;
-            border-radius: .25rem;
-            width: 80vw;
-            max-width: 200px;
-            background: #eee;
-        }
-        .dropMenuInf {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            grid-column-gap: 10px;
-        }
-        /*---- DropdownMenu ----*/
+            height: 90vh;               /*window is 90% of viewport height*/
+            width: 90vw;
+            background-color: #ffffff;
+            opacity: 0;                 /*makes the element invisible*/
+            pointer-events: none;       /*not interactable*/
 
-
-        /*---- Suggestion ----*/
-        .suggestion {
-            overflow: visible;
-            z-index: 5;
-            position: absolute;
-            width: 80%;
-            top: 1rem;
-            background: #fff;
             padding: .5rem;
             border-radius: .25rem;
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(250px);
-            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
+            transform: translateY(250px);   /*moves the element down*/
+            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out; /*gives a smooth transition*/
         }
-        .suggestion.active {
-            opacity: 1;
-            display: inline-block;
-            transform: translateY(0);
-            pointer-events: auto;
+        #sWindow.active {
+            opacity: 1;                 /*makes the window visible*/
+            transform: translateY(0);   /*moves the element to its normal possition*/
+            pointer-events: auto;       /*makes the element interactable */
         }
-        .suggestionRow {
-            padding: .5rem;
-            display: flex;
-            justify-content: center;
-        }
-        .Line {
-            border-bottom: 1px solid grey;
-            margin-bottom: 20px;
-        }
-        .sBilde {
-            max-height: 50vh;
-            max-width: 100%;
-            border-radius: .25rem;
-            object-fit: cover;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-        }
-        .sLinks {
-            max-width: 500px;
-            padding: .5rem;
-            border-radius: .25rem;
-            background: #ddd;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-            transition: background .1s ease-in-out;
-        }
-        .sLinks:hover {
-            background: #aaa;
-        }
-        .sLinkContent {
-            height: 100%;
-            width: 100%;
-            border-radius: .25rem;
-            background: #eee;
-            cursor: pointer;
-        }
-        .noLinkDecor {
+        #sLink {
             text-decoration: none;
             color: #000;
         }
-        .hidden {
-            display: none;
+        #sImg {
+            width: 100%;
+            border-radius: .25rem;
         }
-        /*---- Suggestion ----*/
 
 
         /*---- close-button ----*/
         .close {
+            position: relative;
             float: right;
             display: inline-block;
             padding: 2px 5px;
-            background: #ccc;
+            background: #F2F2F2;
+            #box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             height: 30px;
             width: 30px;
             border-radius: 5px;
         }
         .close:hover {
-            float: right;
             display: inline-block;
             padding: 2px 5px;
-            background: #999;
+            background: #bbb;
             color: #fff;
         }
         /*---- close-button ----*/
@@ -223,139 +224,72 @@
 <div id="background">
     <div id="main_wrapper">
         <div id="side_bar">
-            <!--<img id="logo" src="FoodDiceLogo2.png" alt="Logo">-->
-            <div class="dropdown" data-dropdown>    <!-- data-tag "data-dropdown" -->
-                <button class="link" data-dropdown-button>Filter</button>
-                <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Filters</div>
-                        <div>Select what to filer out:</div>
-                    </div>
-                    <div class="menuRow">
-                        <div class="menuDivi">
-                            <div class="h3">Vegetarian</div>
-                            <div class="dropMenuInf">
-                                <label for="vegetarian">Vegetarian</label>
-                                <input type="checkbox" id="vegetarian" name="vegetarian">
-                                <!--
-                                <label for="meat">Red meat</label>
-                                <input type="checkbox" id="meat" name="meat">
-                                <label for="chicken">Poultry</label>
-                                <input type="checkbox" id="chicken" name="chicken">
-                                <label for="fish">Fish</label>
-                                <input type="checkbox" id="fish" name="fish">
-                                <label for="egg">Egg</label>
-                                <input type="checkbox" id="egg" name="egg">
-                                <label for="milk">Dairy</label>
-                                <input type="checkbox" id="milk" name="milk">
-                                -->
-                            </div>
-                        </div>
-                        <div class="menuDivi">
-                            <div class="h3">Allergies</div>
-                            <div class="dropMenuInf">
-                                <label for="gluten">Gluten</label>
-                                <input type="checkbox" id="gluten" name="gluten">
-                                <!--
-                                <label for="2">option2</label>
-                                <input type="checkbox" id="2" name="2">
-                                <label for="3">option3</label>
-                                <input type="checkbox" id="3" name="3">
-                                -->
-                            </div>
+            <div class="whiteSquare flex_center">
+                <img src="Img/FoodDiceLogo-icon.png" alt="Food Dice logo">
+            </div>
+            <div class="greySquare">
+                <div id="menuButtonContainer" class="">
+                    <button class="button" id="menuButton" onclick="menuToggle()">
+                        <!-- this makes the parent div clickable -->
+                    </button>
+                    <div class="flex_center">
+                        <!-- burger-menu icon -->
+                        <img src="#" alt="">#
+                        <div>
+                            Menu
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="dropdown" data-dropdown>
-                <button class="link" data-dropdown-button>Settings</button>
-                <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Settings</div>
-                    </div>
-                    <div class="menuRow">
-                        <div class="menuDivi">
-                            <div class="h3">Language</div>
-                            <div class="dropMenuInf">
-                                <label for="eng">English</label>
-                                <input type="radio" id="eng" name="lang" value="eng" checked>
-                                <label for="no">Norwegian</label>
-                                <input type="radio" id="no" name="lang" value="no">
-                            </div>
-                        </div>
-                        <div class="menuDivi">
-                            <div class="h3">option2</div>
-                            <div class="dropMenuInf">
-                                <label for="o2"></label>
-                                <input type="checkbox" id="o2">
-                            </div>
-                        </div>
-                        <div class="menuDivi">
-                            <div class="h3">option3</div>
-                            <div class="dropMenuInf">
-                                <label for="o3"></label>
-                                <input type="checkbox" id="o3">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="dropdown" data-dropdown>
-                <button class="link" data-dropdown-button>Favorites</button>
-                <div class="dropdown-menu">
-                    <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Favorites</div>
-                    </div>
-                    <div class="menuRow">
-                        <div class="menuDivi">
-                            <div class="dropMenuInf">
-                                <a href="#">Spagetti</a>
-                                <a href="#">Soup</a>
-                                <a href="#">Pizza</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <div class="dropdown" data-dropdown>
-                <button class="link" data-dropdown-button>Log</button>
-                <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Log</div>
-                    </div>
-                    <div class="inf">
-                        <div class="log-log">
-                            <!-- tomt element -->
-                        </div>
-                    </div>
+            <div id="side_menu" class="">
+                <!-- menu that slides inn -->
+                <div class="container">
+                    <button class="button close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
+
+                    <button class="navButton flex_center">Filter</button>
+                    <button class="navButton flex_center">Log</button>
+                    <button class="navButton flex_center">Settings</button>
                 </div>
             </div>
         </div>
-        <div id="main_container">
-            <button class="link" id="rollButton" onclick="roll()">
-                <!--A dice-->
-                "A dice"
-            </button>
-            <div id="sWindow" class="suggestion" data-dropdown>
-                <button class="link close" onclick="this.parentNode.classList.remove('active')">X</button>
-                <h2 id="sTitle">Test</h2>
-                <div class="suggestionRow">
-                    <div class="sLinks">
-                        <a href="" id="sLink" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sImg" class="sBilde" src="" alt="Bilde av matrett">
-                                <div id="sText" class="h3"></div>
-                            </div>
-                        </a>
+        <div id="main_container" class="flex_center">
+            <div id="hint_box">
+                <button class="button" id="rollButton" onclick="roll()">
+                    <!-- this makes the parent div clickable -->
+                </button>
+                <div id="info_square" class="flex_center">
+                    <div> <!-- a div to hold the text together in the center -->
+                        <div class="t1">Roll the Dice!</div>
+                        <div class="t2">(Press the dice to roll)</div>
                     </div>
                 </div>
             </div>
+            <div id="dice">
+                <div id="placeholder_dice">
+                    "A Dice"
+                    <!-- placeholder dice -->
+                </div>
+            </div>
+            <div id="sWindow" class="">
+                <button class="button close" onclick="this.parentNode.classList.remove('active')">X</button>
+                <div>
+                    <div id="sTitle" class="t1">Test</div>
+                    <div class="">
+                        <div class="">
+                            <a href="#" id="sLink" target="_blank" class="noLinkDecor">
+                                <div class="sLinkContent">
+                                    <img id="sImg" src="" alt="Bilde av matrett">
+                                    <div id="sText" class="h3"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- everything on the suggestion-page goes here -->
+            </div>
 
+            <div id="light"></div>
+            <div id="background_closeBox" onclick="closeActive()"></div>
         </div>
     </div>
 </div>
