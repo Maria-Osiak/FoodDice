@@ -296,40 +296,40 @@
 
 <!--language=JS-->
 <script>
-    //Opens menus
-    document.addEventListener("click", e => {
-        const isDropdownButton = e.target.matches("[data-dropdown-button]")
-        if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return
+    const menu = document.getElementById("side_menu");
+    const sWindow = document.getElementById("sWindow");
+    const sTitle = document.getElementById("sTitle");
+    const sLink = document.getElementById("sLink");
+    const sImg = document.getElementById("sImg");
+    const sText = document.getElementById("sText");
 
-        //holds the active menu open
-        let currentDropdown
-        if (isDropdownButton) {
-            currentDropdown = e.target.closest("[data-dropdown]")
-            currentDropdown.classList.toggle('active')
-        }
-
-        //closes all other menus
-        document.querySelectorAll("[data-dropdown].active").forEach(dropdown => {
-            if (dropdown === currentDropdown) return
-            dropdown.classList.remove('active')
-        })
-    })  //End of addEventListener
-    //EventListener er hentet fra Youtube
-    //Web Dev Simplified. (2021, 18. september). How To Create Advanced CSS Dropdown Menus. [Video]. YouTube. https://www.youtube.com/watch?v=S-VeYcOCFZw
-
-
-
-    //generates a random number, without immediate repeat
+    let numberX = 0;
     let previousNumber = 0;
-    let rolling = true     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
-    let fetchData;
+    let CanRoll = true;     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
+    let pick = 0; //from 0 to 3 -represents All/Glut/Veg/both?
+
+
+    function menuToggle() {
+        menu.classList.toggle('active')
+    }
+    function closeActive() {    //function for closing specified windows when called
+        //console.log("closingActive")
+        menu.classList.remove('active')
+        sWindow.classList.remove('active')
+    }
+    function pickPref() {
+        //function for selecting preference
+        pick = 0 //something between 0 and 3
+    }
 
     function roll() {
-        if (rolling === false) {
-            rolling = true
-            let numberX = Math.floor(Math.random() * 34)
-            if (numberX == previousNumber) {
-                numberX = Math.floor(Math.random() * 34)
+        closeActive()   //calls the function to close all active windows
+        if (CanRoll === true) {
+            CanRoll = false
+            let mathLength = fetchData[pick].length;    //defines the max number for the number generator
+            numberX = Math.floor(Math.random() * mathLength)
+            if (numberX == previousNumber) {        //hvis nummer X er det samme som forrige nummer, trill igjen
+                numberX = Math.floor(Math.random() * mathLength)
                 previousNumber = numberX
                 //console.log(numberX, "reroll");
                 showMenu(numberX);
@@ -342,34 +342,40 @@
     }
 
     function showMenu(numberX) {
+        sTitle.innerText = fetchData[pick][numberX].Title;
+        sLink.href = fetchData[pick][numberX].Link;
+        sImg.src = fetchData[pick][numberX].Img;
+        sText.innerText = fetchData[pick][numberX].Text;
 
-        let sWindow = document.getElementById("sWindow");
-        let sTitle = document.getElementById("sTitle");
-        let sLink = document.getElementById("sLink");
-        let sImg = document.getElementById("sImg");
-        let sText = document.getElementById("sText");
-
-        sTitle.innerText = fetchData['Title' + numberX];
-        sLink.href = fetchData['Link' + numberX];
-        sImg.src = fetchData['Img' + numberX];
-        sText.innerText = fetchData['Text' + numberX];
 
         setTimeout(function(){
             sWindow.classList.toggle('active')
-            rolling = false
+            CanRoll = true
         }, 1000);
     }
 
-    fetch('Suggestions/All.json')
-        .then(response => response.json())
-        .then(data => {
-            fetchData = data;
-            console.log(fetchData);
-            rolling = false
-        })
-        .catch(function (err) {
-	        console.warn('Something went wrong.', err);
-        });
+// Following code is inspired/borrowed from:
+// George, M. (2021, 3. mai). How to do multiple fetch requests in parallel using JavaScript? [Blogginnlegg].
+// Hentet 14. desember 2021 fra https://melvingeorge.me/blog/do-multiple-fetch-requests-parallel-javascript
+
+    const All = fetch('Suggestions/All.json')
+    .then(response => response.json());
+    const Glut = fetch('Suggestions/GlutenFree.json')
+    .then(response => response.json());
+    const Veg = fetch('Suggestions/Vegetarian.json')
+    .then(response => response.json());
+    //const Both = fetch('Suggestions/Both.json')
+    //.then(response => response.json());
+    const allData = Promise.all([All, Glut, Veg]);   // using Promise.all() to get all data before continuing
+
+    allData.then(data => {
+        fetchData = data;
+        //console.log(fetchData);
+        CanRoll = true
+    })
+    .catch(function (err) {
+	    console.warn('Something went wrong when fetching suggestions.', err);
+    });
 
 </script>
 </body>
