@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FoodDice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- link to scalable vector icons -->
     <style>
         body {
             margin: 0px;                /*removes the automatic margin in body*/
@@ -36,7 +38,7 @@
             align-items: center;        /*center child-elements vertically*/
             justify-content: center;    /*center child-elements horizontally*/
         }
-        .whiteSquare {
+        #whiteSquare {
             z-index: 4;                 /*where on the z-axis the object is*/
             position: absolute;         /*placement no longer follows the flow of other elements*/
             height: 70px;
@@ -45,13 +47,12 @@
             border-radius: 0 0 15px 0;  /*creates a rounded border in the bottom-right corner*/
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        .whiteSquare > img {
+        #whiteSquare > img {
             width: 80%;
             display: block;
             margin-top: 10px;
         }
-
-        .greySquare {
+        #greySquare {
             z-index: 3;                 /*where on the z-axis the element and child-elements is*/
             position: absolute;
             height: 115px;
@@ -87,10 +88,6 @@
             position: relative;
             top: 80px;
         }
-            #side_menu .close {
-            #position: relative;
-        }
-
 
         #hint_box {
             z-index: 2;
@@ -134,32 +131,32 @@
         }
 
         .button {
-            position: absolute;
-            display: flex;
             font-family: inherit;       /*inherit font from parent*/
-            font-size: inherit;
-            color: #777;                /*text-color in the button*/
+            color: #000;                /*text-color in the button*/
             background: none;           /*removes standard background*/
             border: none;               /*removes standard border*/
             text-decoration: none;      /*removes standard text-decoration*/
             cursor: pointer;            /*cursor displays as a pointer when being hovered over*/
+        }
+        .clicked {
+            filter: brightness(0.85);   /*darkens elements when used*/
+        }
+        .areaB {
+            position: absolute;
+            display: flex;
             height: 100%;               /*make the button as high as the parent-element*/
             width: 100%;                /*make the button as wide as the parent-element*/
+            font-size: inherit;
         }
-        .navButton {
-            font-family: inherit;
-            font-size: 20px;
-            background: none;
-            border: none;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            cursor: pointer;
+        .navB {
             height: 60px;
             width: 130px;
+            font-size: 20px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
             text-align: center;
             margin-top: 5px;
         }
-        .navButton:hover {
+        .navB:hover {
             background-color: #6FCDF250;
         }
 
@@ -224,37 +221,41 @@
 <div id="background">
     <div id="main_wrapper">
         <div id="side_bar">
-            <div class="whiteSquare flex_center">
+            <div id="whiteSquare" class="flex_center">
                 <img src="Img/FoodDiceLogo-icon.png" alt="Food Dice logo">
             </div>
-            <div class="greySquare">
-                <div id="menuButtonContainer" class="">
-                    <button class="button" id="menuButton" onclick="menuToggle()">
+            <div id="greySquare">
+                <div id="menuButtonContainer">
+                    <button class="button areaB" id="menuButton" onclick="menuToggle()">
                         <!-- this makes the parent div clickable -->
                     </button>
-                    <div class="flex_center">
-                        <!-- burger-menu icon -->
-                        <img src="#" alt="">#
-                        <div>
+                    <div class="flex_center"> <!-- The menu button -->
+                        <i class="fa fa-bars menuIcon" style="font-size: 24px; margin: 0 10px;"></i>
+                        <!--
+                        Burger-menu icon, from https://www.w3schools.com/icons/icons_reference.asp
+                        Specifically from https://www.w3schools.com/icons/tryit.asp?filename=tryicons_fa-bars
+                        Style must be specified in element because style in head does not respond with icon for unknown reason.
+                        -->
+                        <span class="flex_center" style="font-size: 20px; line-height: 16px; height: 14px;"> <!-- line-heigh 0 to align text with icon -->
                             Menu
-                        </div>
+                        </span>
                     </div>
                 </div>
             </div>
             <div id="side_menu" class="">
                 <!-- menu that slides inn -->
                 <div class="container">
-                    <button class="button close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
+                    <button class="button areaB close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
 
-                    <button class="navButton flex_center">Filter</button>
-                    <button class="navButton flex_center">Log</button>
-                    <button class="navButton flex_center">Settings</button>
+                    <button class="button navB flex_center">Filter</button>
+                    <button class="button navB flex_center">Log</button>
+                    <button class="button navB flex_center">Settings</button>
                 </div>
             </div>
         </div>
         <div id="main_container" class="flex_center">
             <div id="hint_box">
-                <button class="button" id="rollButton" onclick="roll()">
+                <button class="button areaB" id="rollButton" onclick="roll()">
                     <!-- this makes the parent div clickable -->
                 </button>
                 <div id="info_square" class="flex_center">
@@ -271,7 +272,7 @@
                 </div>
             </div>
             <div id="sWindow" class="">
-                <button class="button close" onclick="this.parentNode.classList.remove('active')">X</button>
+                <button class="button areaB close" onclick="this.parentNode.classList.remove('active')">X</button>
                 <div>
                     <div id="sTitle" class="t1">Test</div>
                     <div class="">
@@ -297,6 +298,7 @@
 <!--language=JS-->
 <script>
     const menu = document.getElementById("side_menu");
+    const menuB = document.getElementById("greySquare")
     const sWindow = document.getElementById("sWindow");
     const sTitle = document.getElementById("sTitle");
     const sLink = document.getElementById("sLink");
@@ -310,7 +312,11 @@
 
 
     function menuToggle() {
-        menu.classList.toggle('active')
+        menu.classList.add('active')
+        menuB.classList.add('clicked')
+        setTimeout(function(){
+            menuB.classList.remove('clicked')
+        }, 100);
     }
     function closeActive() {    //function for closing specified windows when called
         //console.log("closingActive")
@@ -349,7 +355,7 @@
 
 
         setTimeout(function(){
-            sWindow.classList.toggle('active')
+            sWindow.classList.add('active')
             CanRoll = true
         }, 1000);
     }
