@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FoodDice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- link to scalable vector icons -->
+
     <style>
         body {
             margin: 0px;                /*removes the automatic margin in body*/
@@ -85,6 +87,7 @@
             transform: translateX(0);
         }
         #side_menu > .container {
+            background-color: #F2F2F2;
             position: relative;
             top: 80px;
         }
@@ -130,36 +133,6 @@
             width: inherit;
         }
 
-        .button {
-            font-family: inherit;       /*inherit font from parent*/
-            color: #000;                /*text-color in the button*/
-            background: none;           /*removes standard background*/
-            border: none;               /*removes standard border*/
-            text-decoration: none;      /*removes standard text-decoration*/
-            cursor: pointer;            /*cursor displays as a pointer when being hovered over*/
-        }
-        .clicked {
-            filter: brightness(0.85);   /*darkens elements when used*/
-        }
-        .areaB {
-            position: absolute;
-            display: flex;
-            height: 100%;               /*make the button as high as the parent-element*/
-            width: 100%;                /*make the button as wide as the parent-element*/
-            font-size: inherit;
-        }
-        .navB {
-            height: 60px;
-            width: 130px;
-            font-size: 20px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            margin-top: 5px;
-        }
-        .navB:hover {
-            background-color: #6FCDF250;
-        }
-
         .t1 {
             font-size: 32px;            /*font-size for title 1*/
         }
@@ -196,25 +169,57 @@
         }
 
 
-        /*---- close-button ----*/
+        /*---- buttons ----*/
+        .button {
+            font-family: inherit;       /*inherit font from parent*/
+            color: #000;                /*text-color in the button*/
+            background: none;           /*removes standard background*/
+            border: none;               /*removes standard border*/
+            text-decoration: none;      /*removes standard text-decoration*/
+            cursor: pointer;            /*cursor displays as a pointer when being hovered over*/
+        }
+        .button > i {
+
+        }
+        .clicked {
+            filter: brightness(0.85);   /*darkens elements when used*/
+        }
+        .areaB {
+            position: absolute;
+            display: flex;
+            height: 100%;               /*make the button as high as the parent-element*/
+            width: 100%;                /*make the button as wide as the parent-element*/
+        }
+        .navB {
+            height: 60px;
+            width: 130px;
+            font-size: 20px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 5px;
+        }
+        .navB:hover {
+            background-color: #6FCDF250;
+        }
+        .navB:active {
+            background-color: #F2F2F2;
+            filter: brightness(0.85);
+        }
         .close {
             position: relative;
             float: right;
-            display: inline-block;
-            padding: 2px 5px;
-            background: #F2F2F2;
-            #box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            background-color: inherit;
             height: 30px;
             width: 30px;
             border-radius: 5px;
         }
         .close:hover {
-            display: inline-block;
-            padding: 2px 5px;
-            background: #bbb;
-            color: #fff;
+            filter: brightness(0.90);
         }
-        /*---- close-button ----*/
+        .close:active {
+            filter: brightness(0.80);
+        }
+        /*---- buttons ----*/
     </style>
 </head>
 <body>
@@ -230,7 +235,7 @@
                         <!-- this makes the parent div clickable -->
                     </button>
                     <div class="flex_center"> <!-- The menu button -->
-                        <i class="fa fa-bars menuIcon" style="font-size: 24px; margin: 0 10px;"></i>
+                        <i class="fa fa-bars" style="font-size: 24px; margin: 0 10px;"></i>
                         <!--
                         Burger-menu icon, from https://www.w3schools.com/icons/icons_reference.asp
                         Specifically from https://www.w3schools.com/icons/tryit.asp?filename=tryicons_fa-bars
@@ -242,16 +247,27 @@
                     </div>
                 </div>
             </div>
-            <div id="side_menu" class="">
+            <div id="side_menu" class="active">
                 <!-- menu that slides inn -->
                 <div class="container">
-                    <button class="button areaB close" onclick="this.parentNode.parentNode.classList.remove('active')">X</button>
+                    <div class="close flex_center">
+                        <!-- Button for closing pages-->
+                        <!-- when clicked, the "active"-class is removed from the element's parent-parent-parent-->
+                        <button class="button areaB" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')"></button>
+                        <i class="material-icons" style="font-size:36px">close</i>
+                    </div>
 
-                    <button class="button navB flex_center">Filter</button>
-                    <button class="button navB flex_center">Log</button>
-                    <button class="button navB flex_center">Settings</button>
+
+                    <button class="button navB flex_center" onclick="pageToggle(Filter)">Filter</button>
+                    <button class="button navB flex_center" onclick="pageToggle(Log)">Log</button>
+                    <button class="button navB flex_center" onclick="pageToggle(Settings)">Settings</button>
                 </div>
             </div>
+        </div>
+        <div id="side_menu_pages">
+            <div id="Filter" class=""></div>
+            <div id="Log" class=""></div>
+            <div id="Settings" class=""></div>
         </div>
         <div id="main_container" class="flex_center">
             <div id="hint_box">
@@ -272,8 +288,14 @@
                 </div>
             </div>
             <div id="sWindow" class="">
-                <button class="button areaB close" onclick="this.parentNode.classList.remove('active')">X</button>
-                <div>
+                <div class="close flex_center">
+                    <!-- Button for closing pages-->
+                    <!-- when clicked, the "active"-class is removed from the element's parent-parent-->
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+
+                <div> <!-- en ekstra/ubrukt div? -->
                     <div id="sTitle" class="t1">Test</div>
                     <div class="">
                         <div class="">
@@ -288,7 +310,6 @@
                 </div>
                 <!-- everything on the suggestion-page goes here -->
             </div>
-
             <div id="light"></div>
             <div id="background_closeBox" onclick="closeActive()"></div>
         </div>
@@ -298,13 +319,15 @@
 <!--language=JS-->
 <script>
     const menu = document.getElementById("side_menu");
-    const menuB = document.getElementById("greySquare")
+    const menuB = document.getElementById("greySquare");
+
     const sWindow = document.getElementById("sWindow");
     const sTitle = document.getElementById("sTitle");
     const sLink = document.getElementById("sLink");
     const sImg = document.getElementById("sImg");
     const sText = document.getElementById("sText");
 
+    let pageX = "Filter";
     let numberX = 0;
     let previousNumber = 0;
     let CanRoll = true;     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
@@ -317,6 +340,9 @@
         setTimeout(function(){
             menuB.classList.remove('clicked')
         }, 100);
+    }
+    function pageToggle(pageX) {
+        [pageX].classList.add('active')
     }
     function closeActive() {    //function for closing specified windows when called
         //console.log("closingActive")
