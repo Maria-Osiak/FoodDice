@@ -290,6 +290,16 @@
             filter: brightness(0.80);
         }
         /*---- buttons ----*/
+        /* Remove tap highlight on iOS */
+        input,
+        textarea,
+        button,
+        select,
+        label,
+        a {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
     </style>
 </head>
 <body>
@@ -374,7 +384,7 @@
                     </div>
                 </div>
             </div>
-            <div id="Log" class="menu_page active">
+            <div id="Log" class="menu_page">
                 <div class="close flex_center">
                     <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
                     <i class="material-icons" style="font-size:36px">close</i>
