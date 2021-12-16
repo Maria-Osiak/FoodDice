@@ -7,8 +7,10 @@
     <title>FoodDice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- link to scalable vector icons -->
-
+    <!--
+    Links to scalable vector icons.
+    Retrieved from https://www.w3schools.com/icons/icons_reference.asp
+    -->
     <style>
         body {
             margin: 0px;                /*removes the automatic margin in body*/
@@ -16,7 +18,6 @@
             font-family: sans-serif;    /*set the font for the page*/
             background-color: #AEEFFC;
         }
-        /*---- page-containers ----*/
         #background {
             position: relative;
             overflow: hidden;
@@ -32,9 +33,6 @@
             width: inherit;             /*inherit the width from parent*/
             overflow: hidden;           /*hides child-elements that goes outside the border of this element*/
         }
-        /*---- page-containers ----*/
-
-
         .flex_center {
             display: flex;              /*makes placement og child-elements flexible*/
             align-items: center;        /*center child-elements vertically*/
@@ -69,8 +67,6 @@
             height: 45px;
             width: 110px;
             display: flex;
-            font-family: ;
-            font-size: ;
         }
         #side_menu {
             z-index: 3;
@@ -113,7 +109,7 @@
         #placeholder_dice {
             height: 140px;
             width: 140px;
-            background-color: #a0a0a0;
+            background-color: #A0A0A0;
         }
 
 
@@ -134,19 +130,23 @@
         }
 
         .t1 {
-            font-size: 32px;            /*font-size for title 1*/
+            font-size: 32px;            /*font-size for text 1*/
         }
         .t2 {
-            font-size: 16px;            /*font-size for title 2*/
+            margin-left: 10px;
+            font-size: 25px;            /*font-size for text 2*/
+        }
+        .t3 {
+            font-size: 16px;            /*font-size for text 3*/
         }
         #sWindow {                      /*suggestionWindow*/
             z-index: 5;
             position: absolute;
             height: 90vh;               /*window is 90% of viewport height*/
             width: 90vw;
-            background-color: #ffffff;
+            background-color: #FFFFFF;
             opacity: 0;                 /*makes the element invisible*/
-            pointer-events: none;       /*not interactable*/
+            pointer-events: none;       /*element is not interactive*/
 
             padding: .5rem;
             border-radius: .25rem;
@@ -156,8 +156,8 @@
         }
         #sWindow.active {
             opacity: 1;                 /*makes the window visible*/
-            transform: translateY(0);   /*moves the element to its normal possition*/
-            pointer-events: auto;       /*makes the element interactable */
+            transform: translateY(0);   /*moves the element to its normal position*/
+            pointer-events: auto;       /*makes the element interactive */
         }
         #sLink {
             text-decoration: none;
@@ -167,7 +167,62 @@
             width: 100%;
             border-radius: .25rem;
         }
+        #side_menu_pages {
+            height: inherit;
+            width: inherit;
+            position: absolute;
+        }
+        .menu_page {
+            z-index: 5;
+            position: absolute;
+            height: 90vh;
+            width: 90vw;
+            background-color: #FFFFFF;
+            opacity: 0;
+            pointer-events: none;
 
+            padding: .5rem;
+            border-radius: .25rem;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            transform: translateX(-350px);  /*moves page 350px to the left*/
+            transition: opacity 250ms ease-in-out, transform 300ms ease-in-out;
+        }
+        .menu_page.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+        .menu_head {
+            height: 35px;
+            width: auto;
+            background-color: #1B3B57;
+            color: #FFFFFF;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .menu_content {
+            height: inherit;
+            width: inherit;
+        }
+        .menu_box {
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+        }
+        .box_top {
+            height: ;
+            width: inherit;
+            font-size: 20px;
+            padding-left: 10px;
+            background-color: #DADADA;
+            border-radius: 5px 5px 0 0;
+        }
+        .box_content {
+            height: 80px;
+            padding: 10px;
+            border-radius: 0 0 5px 5px;
+        }
 
         /*---- buttons ----*/
         .button {
@@ -177,9 +232,6 @@
             border: none;               /*removes standard border*/
             text-decoration: none;      /*removes standard text-decoration*/
             cursor: pointer;            /*cursor displays as a pointer when being hovered over*/
-        }
-        .button > i {
-
         }
         .clicked {
             filter: brightness(0.85);   /*darkens elements when used*/
@@ -199,7 +251,7 @@
             margin-top: 5px;
         }
         .navB:hover {
-            background-color: #6FCDF250;
+            background-color: #64CDD950;
         }
         .navB:active {
             background-color: #F2F2F2;
@@ -209,8 +261,10 @@
             position: relative;
             float: right;
             background-color: inherit;
-            height: 30px;
-            width: 30px;
+            height: 35px;
+            width: 35px;
+            margin-left: 5px;
+            margin-bottom: 5px;
             border-radius: 5px;
         }
         .close:hover {
@@ -226,6 +280,7 @@
 <div id="background">
     <div id="main_wrapper">
         <div id="side_bar">
+            <!-- division for the side-menu -->
             <div id="whiteSquare" class="flex_center">
                 <img src="Img/FoodDiceLogo-icon.png" alt="Food Dice logo">
             </div>
@@ -241,35 +296,110 @@
                         Specifically from https://www.w3schools.com/icons/tryit.asp?filename=tryicons_fa-bars
                         Style must be specified in element because style in head does not respond with icon for unknown reason.
                         -->
-                        <span class="flex_center" style="font-size: 20px; line-height: 16px; height: 14px;"> <!-- line-heigh 0 to align text with icon -->
+                        <span class="flex_center" style="font-size: 20px; line-height: 16px; height: 14px;"> <!-- line-height 0 to align text with icon -->
                             Menu
                         </span>
                     </div>
                 </div>
             </div>
-            <div id="side_menu" class="active">
+            <div id="side_menu" class="">
                 <!-- menu that slides inn -->
                 <div class="container">
                     <div class="close flex_center">
-                        <!-- Button for closing pages-->
-                        <!-- when clicked, the "active"-class is removed from the element's parent-parent-parent-->
+                        <!--
+                        Button for closing pages.
+                        When clicked, the "active"-class is removed from the element's parent-parent-parent
+                        -->
                         <button class="button areaB" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')"></button>
                         <i class="material-icons" style="font-size:36px">close</i>
                     </div>
-
-
                     <button class="button navB flex_center" onclick="pageToggle(Filter)">Filter</button>
                     <button class="button navB flex_center" onclick="pageToggle(Log)">Log</button>
                     <button class="button navB flex_center" onclick="pageToggle(Settings)">Settings</button>
                 </div>
             </div>
         </div>
-        <div id="side_menu_pages">
-            <div id="Filter" class=""></div>
-            <div id="Log" class=""></div>
-            <div id="Settings" class=""></div>
+        <div id="side_menu_pages" class="flex_center">
+            <!-- division for the menu-pages -->
+            <div id="Filter" class="menu_page">
+                <div class="close flex_center">
+                    <!--
+                    Button for closing pages
+                    When clicked, the "active"-class is removed from the element's parent-parent
+                    -->
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+                <div class="menu_head">
+                    <div class="t2">Filter</div>
+                </div>
+                <div class="menu_content">
+                    <div class="menu_box">
+                        <div class="box_top">Allergies</div>
+                        <div class="box_content">
+                            <input type="checkbox" id="gluten" name="allergy">
+                            <label for="gluten">Gluten</label>
+                            <!--
+                            <input type="checkbox" id="milk" name="allergy">
+                            <label for="milk">Milk</label>
+                            -->
+                        </div>
+                    </div>
+                    <div class="menu_box">
+                        <div class="box_top">Preferences</div>
+                        <div class="box_content">
+                            <input type="checkbox" id="vegetarian" name="preference">
+                            <label for="vegetarian">Vegetarian</label>
+                            <!--
+                            <input type="checkbox" id="vegan" name="allergy">
+                            <label for="vegan">Vegan</label>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="Log" class="menu_page">
+                <div class="close flex_center">
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+                <div class="menu_head">
+                    <div class="t2">Log</div>
+                </div>
+                <div class="flex_center">
+                    <div>
+                        <div>Your log is empty.</div>
+                        <div>When you roll the dice, your<br>
+                            results will appear here.</div>
+                    </div>
+                </div>
+            </div>
+            <div id="Settings" class="menu_page">
+                <div class="close flex_center">
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+                <div class="menu_head">
+                    <div class="t2">Settings</div>
+                </div>
+                <div class="menu_content">
+                    <div class="menu_box">
+                        <div class="box_top">Accessibility</div>
+                        <div class="box_content">
+                            <!-- add content here -->
+                        </div>
+                    </div>
+                    <div class="menu_box">
+                        <div class="box_top">Customization</div>
+                        <div class="box_content">
+                            <!-- add content here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="main_container" class="flex_center">
+            <!-- division for the content in the middle of the page -->
             <div id="hint_box">
                 <button class="button areaB" id="rollButton" onclick="roll()">
                     <!-- this makes the parent div clickable -->
@@ -277,7 +407,7 @@
                 <div id="info_square" class="flex_center">
                     <div> <!-- a div to hold the text together in the center -->
                         <div class="t1">Roll the Dice!</div>
-                        <div class="t2">(Press the dice to roll)</div>
+                        <div class="t3">(Press the dice to roll)</div>
                     </div>
                 </div>
             </div>
@@ -289,19 +419,20 @@
             </div>
             <div id="sWindow" class="">
                 <div class="close flex_center">
-                    <!-- Button for closing pages-->
-                    <!-- when clicked, the "active"-class is removed from the element's parent-parent-->
+                    <!--
+                    Button for closing pages.
+                    When clicked, the "active"-class is removed from the element's parent-parent
+                    -->
                     <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
                     <i class="material-icons" style="font-size:36px">close</i>
                 </div>
-
-                <div> <!-- en ekstra/ubrukt div? -->
+                <div> <!-- an extra/unused div? -->
                     <div id="sTitle" class="t1">Test</div>
-                    <div class="">
+                    <div class=""> <!-- unused? -->
                         <div class="">
                             <a href="#" id="sLink" target="_blank" class="noLinkDecor">
                                 <div class="sLinkContent">
-                                    <img id="sImg" src="" alt="Bilde av matrett">
+                                    <img id="sImg" src="" alt="Picture of dish">
                                     <div id="sText" class="h3"></div>
                                 </div>
                             </a>
@@ -320,6 +451,9 @@
 <script>
     const menu = document.getElementById("side_menu");
     const menuB = document.getElementById("greySquare");
+    const Filter = document.getElementById("Filter");
+    const Log = document.getElementById("Log");
+    const Settings = document.getElementById("Settings");
 
     const sWindow = document.getElementById("sWindow");
     const sTitle = document.getElementById("sTitle");
@@ -327,47 +461,69 @@
     const sImg = document.getElementById("sImg");
     const sText = document.getElementById("sText");
 
-    let pageX = "Filter";
+    const check1 = document.getElementById("gluten")
+    const check2 = document.getElementById("vegetarian")
+
     let numberX = 0;
     let previousNumber = 0;
-    let CanRoll = true;     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
+    let CanRoll = true;     //The roll-process must finish before a new process can begin
     let pick = 0; //from 0 to 3 -represents All/Glut/Veg/both?
-
+    let prevPage = sWindow; //prevent pageToggle() from returning error after first use.
 
     function menuToggle() {
         menu.classList.add('active')
         menuB.classList.add('clicked')
-        setTimeout(function(){
+        setTimeout(function() {
             menuB.classList.remove('clicked')
         }, 100);
     }
-    function pageToggle(pageX) {
-        [pageX].classList.add('active')
+    function pageToggle(pageX) {    //function for opening the menu-page corresponding to the button pressed.
+        pageX.classList.add('active')
+        if (pageX == prevPage) {
+           return;    //in case the same menu-page is opened twice, nothing will be closed.
+        } else {
+            prevPage.classList.remove('active');    //closes any additional menu-page currently open
+            prevPage = pageX
+        }
     }
-    function closeActive() {    //function for closing specified windows when called
-        //console.log("closingActive")
+    function closeActive() {    //function for closing all sub-pages when called
         menu.classList.remove('active')
         sWindow.classList.remove('active')
+        Filter.classList.remove('active')
+        Log.classList.remove('active')
+        Settings.classList.remove('active')
     }
     function pickPref() {
+        console.log(check1)
         //function for selecting preference
-        pick = 0 //something between 0 and 3
+        if (!check1.checked && !check2.checked) {
+            pick = 0
+        } else if (check1.checked && !check2.checked) {
+            pick = 1
+        } else if (!check1.checked && check2.checked) {
+            pick = 2
+        } else {
+            pick = 0    //should be 3, but is 0 temporarily
+        }
+        //if 1 and 2 is false -> all
+        //if 1 -> gluten
+        //if 2 -> vegan
+        //if 1 and 2 is true -> both
     }
 
     function roll() {
+        pickPref()
         closeActive()   //calls the function to close all active windows
         if (CanRoll === true) {
             CanRoll = false
             let mathLength = fetchData[pick].length;    //defines the max number for the number generator
             numberX = Math.floor(Math.random() * mathLength)
-            if (numberX == previousNumber) {        //hvis nummer X er det samme som forrige nummer, trill igjen
+            if (numberX == previousNumber) {        //if numberX is the same as previous number, roll again
                 numberX = Math.floor(Math.random() * mathLength)
                 previousNumber = numberX
-                //console.log(numberX, "reroll");
                 showMenu(numberX);
             } else {
                 previousNumber = numberX
-                //console.log(numberX);
                 showMenu(numberX);
             }
         }
@@ -380,7 +536,7 @@
         sText.innerText = fetchData[pick][numberX].Text;
 
 
-        setTimeout(function(){
+        setTimeout(function() {
             sWindow.classList.add('active')
             CanRoll = true
         }, 1000);
@@ -388,7 +544,7 @@
 
 // Following code is inspired/borrowed from:
 // George, M. (2021, 3. mai). How to do multiple fetch requests in parallel using JavaScript? [Blogginnlegg].
-// Hentet 14. desember 2021 fra https://melvingeorge.me/blog/do-multiple-fetch-requests-parallel-javascript
+// Retrieved 14. December 2021 from https://melvingeorge.me/blog/do-multiple-fetch-requests-parallel-javascript
 
     const All = fetch('Suggestions/All.json')
     .then(response => response.json());
@@ -402,7 +558,6 @@
 
     allData.then(data => {
         fetchData = data;
-        //console.log(fetchData);
         CanRoll = true
     })
     .catch(function (err) {
