@@ -1,487 +1,589 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FoodDice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--
+    Links to scalable vector icons.
+    Font Awesome Icons and Google Icons.
+    Retrieved from https://www.w3schools.com/icons/icons_reference.asp
+    -->
     <style>
         body {
-            margin: 0px;
-            height: 100vh;
-            font-family: sans-serif;
-            background: lightgrey;
+            margin: 0px;                /*removes the automatic margin in body*/
+            height: 100vh;              /*make the body as high as the viewport*/
+            font-family: sans-serif;    /*set the font for the page*/
+            background-color: #AEEFFC;
         }
-
-        /*---- page-containers ----*/
-        #main_wrapper {
-            height: 100vh;
-            width: 100vw;
-        }
-        #side_bar {
-            position: absolute;
-            background: #eee;
-        }
-        #main_container {
-            height: inherit;
-            width: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        #background {
+            position: relative;
             overflow: hidden;
         }
-        #rollButton {
-            z-index: 1;
-            width: 180px;
-            height: 180px;
-            opacity: 1;
-            pointer-events: auto;
-            background: #eee;
+        #main_wrapper {
+            height: 100vh;
+            width: 100vw;               /*makes the wrapper 100% of viewport width*/
+            overflow: hidden;           /*hides child-elements that goes outside the border of this element*/
+            position: relative;         /*makes it possible to offset placement, relative to normal placement*/
         }
-        /*---- page-containers ----*/
-
-
-        /*---- paragraphs ----*/
-        .h1 {
-            font: bold 2em Arial;
+        #main_container {
+            height: inherit;            /*inherit the height from parent*/
+            width: inherit;             /*inherit the width from parent*/
+            overflow: hidden;           /*hides child-elements that goes outside the border of this element*/
         }
-        .h2 {
-            font: bold 1.5em Arial;
+        .flex_center {
+            display: flex;              /*makes placement og child-elements flexible*/
+            align-items: center;        /*center child-elements vertically*/
+            justify-content: center;    /*center child-elements horizontally*/
         }
-        .h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-            border-bottom: 1px solid grey;
+        #whiteSquare {
+            z-index: 4;                 /*where on the z-axis the object is*/
+            position: absolute;         /*placement no longer follows the flow of other elements*/
+            height: 70px;
+            width: 110px;
+            background-color: #FFFFFF;
+            border-radius: 0 0 15px 0;  /*creates a rounded border in the bottom-right corner*/
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        /*---- paragraphs ----*/
-
-
-        /*---- DropdownMenu ----*/
-        #logo > img {
-            width: 40%;
+        #whiteSquare > img {
+            width: 80%;
+            display: block;
+            margin-top: 10px;
         }
-        .link {
-            margin: .5rem 0;
+        #greySquare {
+            z-index: 3;                 /*where on the z-axis the element and child-elements is*/
+            position: absolute;
+            height: 115px;
+            width: 110px;
+            background-color: #F2F2F2;
+            border-radius: 0 0 15px 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        #menuButtonContainer {
+            position: relative;         /*relative, so the container can be offset*/
+            top: 70px;                  /*moves container down 70 pixels*/
+            height: 45px;
+            width: 110px;
             display: flex;
-            background: none;
-            border: none;
-            text-decoration: none;
-            color: #777;
-            font-family: inherit;
-            font-size: inherit;
-            cursor: pointer;
-            padding: 5px;
-            width: 100%;
         }
-        .link:hover {
-            color: black;
+        #side_menu {
+            z-index: 3;
+            position: absolute;
+            height: 100vh;
+            width: 130px;
+            background-color: #F2F2F2;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            transform: translateX(-250px);   /*moves the element left*/
+            transition: transform 300ms ease-in-out; /*gives a smooth transition*/
         }
-        .dropdown {
-            width:100%;
+        #side_menu.active {
+            display: inline-block;
+            transform: translateX(0);
         }
-        .dropdown-menu {
+        #side_menu > .container {
+            background-color: #F2F2F2;
+            position: relative;
+            top: 80px;
+        }
+
+        #hint_box {
+            z-index: 2;
+            position: absolute;
+            height: 95vh;
+            max-height: 310px;
+            display: flex;
+        }
+        #info_square {
+            height: 80px;
+            width: 240px;
+            align-self: flex-end;       /*place the square at the bottom of the parent*/
+            border-radius: 25px;        /*rounded corners*/
+            background-color: #FFFFFFdd;
+            text-align: center;         /*center text horizontally*/
+        }
+        #dice {
+            z-index: 1;
+        }
+        #placeholder_dice {
+            height: 140px;
+            width: 140px;
+            background-color: #A0A0A0;
+        }
+
+
+        #light {
+            z-index: 1;
+            position: absolute;
+            border-radius: 50%;         /*50% makes the element a circle*/
+            filter: blur(15px);         /*blurs the element*/
+            height: 375px;
+            width: 375px;
+            background-color: #FCFCFC50;/*color with low opacity*/
+        }
+        #background_closeBox {
+            z-index: 0;
+            position: absolute;
+            height: inherit;
+            width: inherit;
+        }
+
+        .t1 {
+            font-size: 32px;            /*font-size for text 1*/
+        }
+        .t2 {
+            margin-left: 10px;
+            font-size: 25px;            /*font-size for text 2*/
+        }
+        .t3 {
+            font-size: 16px;            /*font-size for text 3*/
+        }
+        #sWindow {                      /*suggestionWindow*/
             z-index: 5;
             position: absolute;
-            left: 0;
-            top: 1rem;
-            width: 80vw;
-            max-width: 440px;
-            background: #fff;
-            padding: .25rem;
+            height: 90vh;               /*window is 90% of viewport height*/
+            width: 90vw;
+            background-color: #FFFFFF;
+            opacity: 0;                 /*makes the element invisible*/
+            pointer-events: none;       /*element is not interactive*/
+
+            padding: .5rem;
             border-radius: .25rem;
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            transform: translateY(250px);   /*moves the element down*/
+            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out; /*gives a smooth transition*/
+        }
+        #sWindow.active {
+            opacity: 1;                 /*makes the window visible*/
+            transform: translateY(0);   /*moves the element to its normal position*/
+            pointer-events: auto;       /*makes the element interactive */
+        }
+        #sLink {
+            text-decoration: none;
+            color: #000;
+        }
+        #sImg {
+            width: 100%;
+            border-radius: .25rem;
+        }
+        #side_menu_pages {
+            height: inherit;
+            width: inherit;
+            position: absolute;
+        }
+        .menu_page {
+            z-index: 5;
+            position: absolute;
+            height: 90vh;
+            width: 90vw;
+            background-color: #FFFFFF;
             opacity: 0;
             pointer-events: none;
-            transform: translateX(-250px);
-            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
+
+            padding: .5rem;
+            border-radius: .25rem;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            transform: translateX(-350px);  /*moves page 350px to the left*/
+            transition: opacity 250ms ease-in-out, transform 300ms ease-in-out;
         }
-        .dropdown.active > .link + .dropdown-menu {
+        .menu_page.active {
             opacity: 1;
             transform: translateX(0);
             pointer-events: auto;
         }
-        .menuTop {
-            background: #eee;
-            padding: .5rem;
-            border-radius: .25rem;
-            margin-bottom: 5px;
-        }
-        .menuRow {
+        .menu_head {
+            height: 35px;
+            width: auto;
+            background-color: #1B3B57;
+            color: #FFFFFF;
+            border-radius: 5px;
             display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-            gap: 15px;
+            align-items: center;
         }
-        .menuDivi {
-            padding: .25rem;
-            border-radius: .25rem;
-            width: 80vw;
-            max-width: 200px;
-            background: #eee;
+        .menu_content {
+            height: inherit;
+            width: inherit;
         }
-        .dropMenuInf {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            grid-column-gap: 10px;
+        .menu_box {
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
         }
-        /*---- DropdownMenu ----*/
-
-
-        /*---- Suggestion ----*/
-        .suggestion {
-            overflow: visible;
-            z-index: 5;
-            position: absolute;
-            width: 80%;
-            top: 1rem;
-            background: #fff;
-            padding: .5rem;
-            border-radius: .25rem;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(250px);
-            transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
+        .box_top {
+            height: ;
+            width: inherit;
+            font-size: 20px;
+            padding-left: 10px;
+            background-color: #DADADA;
+            border-radius: 5px 5px 0 0;
         }
-        .suggestion.active {
+        .box_content {
+            height: 80px;
+            padding: 10px;
+            border-radius: 0 0 5px 5px;
+        }
+        #log_msg {
+            position: relative;
+            text-align: center;
             opacity: 1;
-            display: inline-block;
-            transform: translateY(0);
-            pointer-events: auto;
+            margin-top: 15%;
+            min-margin-top: 15px;
         }
-        .suggestionRow {
-            padding: .5rem;
+        .log_msg_cont > .t2 {
+            margin-left: 0px;
+            margin-bottom: 35px;
+        }
+        #log_msg.hidden {
+            opacity: 0;
+        }
+
+
+        /*---- buttons ----*/
+        .button {
+            font-family: inherit;       /*inherit font from parent*/
+            color: #000;                /*text-color in the button*/
+            background: none;           /*removes standard background*/
+            border: none;               /*removes standard border*/
+            text-decoration: none;      /*removes standard text-decoration*/
+            cursor: pointer;            /*cursor displays as a pointer when being hovered over*/
+        }
+        .clicked {
+            filter: brightness(0.85);   /*darkens elements when used*/
+        }
+        .areaB {
+            position: absolute;
             display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-            gap: 15px;
+            height: 100%;               /*make the button as high as the parent-element*/
+            width: 100%;                /*make the button as wide as the parent-element*/
         }
-        .Line {
-            border-bottom: 1px solid grey;
-            margin-bottom: 20px;
+        .navB {
+            height: 60px;
+            width: 130px;
+            font-size: 20px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 5px;
         }
-        .sBilde {
-            max-height: 50vh;
-            max-width: 100%;
-            padding: .5rem;
-            border-radius: .25rem;
-            background: #ddd;
-            object-fit: cover;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+        .navB:hover {
+            background-color: #64CDD950;
         }
-        .sLinks {
-            max-width: 500px;
-            padding: .5rem;
-            border-radius: .25rem;
-            background: #ddd;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-            transition: background .1s ease-in-out;
+        .navB:active {
+            background-color: #F2F2F2;
+            filter: brightness(0.85);
         }
-        .sLinks:hover {
-            background: #aaa;
-        }
-        .sLinkContent {
-            height: 100%;
-            width: 100%;
-            border-radius: .25rem;
-            background: #eee;
-            cursor: pointer;
-        }
-        .noLinkDecor {
-            text-decoration: none;
-            color: #000;
-        }
-        .linkBilde {
-            width: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-            float: left;
-        }
-        .hidden {
-            display: none;
-        }
-        /*---- Suggestion ----*/
-
-
-        /*---- close-button ----*/
         .close {
+            position: relative;
             float: right;
-            display: inline-block;
-            padding: 2px 5px;
-            background: #ccc;
-            height: 23px;
-            width: 23px;
+            background-color: inherit;
+            height: 35px;
+            width: 35px;
+            margin-left: 5px;
+            margin-bottom: 5px;
             border-radius: 5px;
         }
         .close:hover {
-            float: right;
-            display: inline-block;
-            padding: 2px 5px;
-            background: #999;
-            color: #fff;
+            filter: brightness(0.90);
         }
-        /*---- close-button ----*/
+        .close:active {
+            filter: brightness(0.80);
+        }
+        /*---- buttons ----*/
     </style>
 </head>
 <body>
 <div id="background">
     <div id="main_wrapper">
         <div id="side_bar">
-            <!--<img id="logo" src="FoodDiceLogo2.png" alt="Logo">-->
-            <div class="dropdown" data-dropdown>    <!-- data-tag "data-dropdown" -->
-                <button class="link" data-dropdown-button>Filter</button>
-                <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Filters</div>
-                        <div>Select what to filer out:</div>
+            <!-- division for the side-menu -->
+            <div id="whiteSquare" class="flex_center">
+                <img src="Img/FoodDiceLogo-icon.png" alt="Food Dice logo">
+            </div>
+            <div id="greySquare">
+                <div id="menuButtonContainer">
+                    <button class="button areaB" id="menuButton" onclick="menuToggle()">
+                        <!-- this makes the parent div clickable -->
+                    </button>
+                    <div class="flex_center"> <!-- The menu button -->
+                        <i class="fa fa-bars" style="font-size: 24px; margin: 0 10px;"></i>
+                        <!--
+                        Burger-menu icon, from https://www.w3schools.com/icons/icons_reference.asp
+                        Specifically from https://www.w3schools.com/icons/tryit.asp?filename=tryicons_fa-bars
+                        Style must be specified in element because style in head does not respond with icon for unknown reason.
+                        -->
+                        <span class="flex_center" style="font-size: 20px; line-height: 16px; height: 14px;"> <!-- line-height 0 to align text with icon -->
+                            Menu
+                        </span>
                     </div>
-                    <div class="menuRow">
-                        <div class="menuDivi">
-                            <div class="h3">Vegeterian</div>
-                            <div class="dropMenuInf">
-                                <label for="meat">Red meat</label>
-                                <input type="checkbox" id="meat" name="meat">
-                                <label for="chicken">Poultry</label>
-                                <input type="checkbox" id="chicken" name="chicken">
-                                <label for="fish">Fish</label>
-                                <input type="checkbox" id="fish" name="fish">
-                                <label for="egg">Egg</label>
-                                <input type="checkbox" id="egg" name="egg">
-                                <label for="milk">Dairy</label>
-                                <input type="checkbox" id="milk" name="milk">
-                            </div>
+                </div>
+            </div>
+            <div id="side_menu" class="">
+                <!-- menu that slides inn -->
+                <div class="container">
+                    <div class="close flex_center">
+                        <!--
+                        Button for closing pages.
+                        When clicked, the "active"-class is removed from the element's parent-parent-parent
+                        -->
+                        <button class="button areaB" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')"></button>
+                        <i class="material-icons" style="font-size:36px">close</i>
+                    </div>
+                    <button class="button navB flex_center" onclick="pageToggle(Filter)">Filter</button>
+                    <button class="button navB flex_center" onclick="pageToggle(Log)">Log</button>
+                    <button class="button navB flex_center" onclick="pageToggle(Settings)">Settings</button>
+                </div>
+            </div>
+        </div>
+        <div id="side_menu_pages" class="flex_center">
+            <!-- division for the menu-pages -->
+            <div id="Filter" class="menu_page">
+                <div class="close flex_center">
+                    <!--
+                    Button for closing pages
+                    When clicked, the "active"-class is removed from the element's parent-parent
+                    -->
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+                <div class="menu_head">
+                    <div class="t2">Filter</div>
+                </div>
+                <div class="menu_content">
+                    <div class="menu_box">
+                        <div class="box_top">Allergies</div>
+                        <div class="box_content">
+                            <input type="checkbox" id="gluten" name="allergy">
+                            <label for="gluten">Gluten</label>
+                            <!--
+                            <input type="checkbox" id="milk" name="allergy">
+                            <label for="milk">Milk</label>
+                            -->
                         </div>
-                        <div class="menuDivi">
-                            <div class="h3">Allergies</div>
-                            <div class="dropMenuInf">
-                                <label for="gluten">Gluten</label>
-                                <input type="checkbox" id="gluten" name="gluten">
-                                <label for="2">option2</label>
-                                <input type="checkbox" id="2" name="2">
-                                <label for="3">option3</label>
-                                <input type="checkbox" id="3" name="3">
-                            </div>
+                    </div>
+                    <div class="menu_box">
+                        <div class="box_top">Preferences</div>
+                        <div class="box_content">
+                            <input type="checkbox" id="vegetarian" name="preference">
+                            <label for="vegetarian">Vegetarian</label>
+                            <!--
+                            <input type="checkbox" id="vegan" name="allergy">
+                            <label for="vegan">Vegan</label>
+                            -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="dropdown" data-dropdown>
-                <button class="link" data-dropdown-button>Settings</button>
-                <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Settings</div>
-                    </div>
-                    <div class="menuRow">
-                        <div class="menuDivi">
-                            <div class="h3">Language</div>
-                            <div class="dropMenuInf">
-                                <label for="eng">English</label>
-                                <input type="radio" id="eng" name="lang" value="eng" checked>
-                                <label for="no">Norwegian</label>
-                                <input type="radio" id="no" name="lang" value="no">
-                            </div>
-                        </div>
-                        <div class="menuDivi">
-                            <div class="h3">option2</div>
-                            <div class="dropMenuInf">
-                                <label for="o2"></label>
-                                <input type="checkbox" id="o2">
-                            </div>
-                        </div>
-                        <div class="menuDivi">
-                            <div class="h3">option3</div>
-                            <div class="dropMenuInf">
-                                <label for="o3"></label>
-                                <input type="checkbox" id="o3">
-                            </div>
+            <div id="Log" class="menu_page active">
+                <div class="close flex_center">
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+                <div class="menu_head">
+                    <div class="t2">Log</div>
+                </div>
+                <div id="log_msg" class="">
+                    <!-- display for message when log is empty -->
+                    <div class="flex_center">
+                        <div class="log_msg_cont">
+                            <i class="material-icons" style="font-size:40px; color: #1B3B57;">storage</i>
+                            <div class="t2">Your log is empty</div>
+                            <div class="t3">When you roll the dice, your <br>
+                                results will appear here.</div>
                         </div>
                     </div>
                 </div>
+
             </div>
-            <!--<div class="dropdown" data-dropdown>
-                <button class="link" data-dropdown-button>Favorites</button>
-                <div class="dropdown-menu">
-                    <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Favorites</div>
-                    </div>
-                    <div class="menuRow">
-                        <div class="menuDivi">
-                            <div class="dropMenuInf">
-                                <a href="#">Spagetti</a>
-                                <a href="#">Soup</a>
-                                <a href="#">Pizza</a>
-                            </div>
+            <div id="Settings" class="menu_page">
+                <div class="close flex_center">
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+                <div class="menu_head">
+                    <div class="t2">Settings</div>
+                </div>
+                <div class="menu_content">
+                    <div class="menu_box">
+                        <div class="box_top">Accessibility</div>
+                        <div class="box_content">
+                            <!-- add content here -->
                         </div>
                     </div>
-                </div>
-            </div>-->
-            <div class="dropdown" data-dropdown>
-                <button class="link" data-dropdown-button>Log</button>
-                <div class="dropdown-menu">
-                    <div class="menuTop">
-                        <button class="link close" onclick="this.parentNode.parentNode.parentNode.classList.remove('active')">X</button>
-                        <div class="h2">Log</div>
-                    </div>
-                    <div class="inf">
-                        <div class="log-log">
-                            <!-- tomt element -->
+                    <div class="menu_box">
+                        <div class="box_top">Customization</div>
+                        <div class="box_content">
+                            <!-- add content here -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="main_container">
-            <button class="link" id="rollButton" onclick="roll()">
-                <!--A dice-->
-                "A dice"
-            </button>
-            <div class="suggestion" data-dropdown>
-                <button class="link close" onclick="this.parentNode.classList.remove('active')">X</button>
-                <h2 id="suggestion"></h2>
-                <div class="suggestionRow Line">
-                    <img id="sImg" class="sBilde" src="" alt="Bilde av matrett">
-                </div>
-                <h3>Choose a recipe:</h3>
-                <div class="suggestionRow">
-                    <div class="sLinks">
-                        <a href="" id="sLink1" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sLink1Img" class="linkBilde" src="" alt="">
-                                <div id="sLink1Text" class="h3"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sLinks">
-                        <a href="" id="sLink2" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sLink2Img" class="linkBilde" src="" alt="">
-                                <div id="sLink2Text" class="h3"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sLinks">
-                        <a href="" id="sLink3" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sLink3Img" class="linkBilde" src="" alt="">
-                                <div id="sLink3Text" class="h3"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sLinks">
-                        <a href="" id="sLink4" target="_blank" class="noLinkDecor">
-                            <div class="sLinkContent">
-                                <img id="sLink4Img" class="linkBilde" src="" alt="">
-                                <div id="sLink4Text" class="h3"></div>
-                            </div>
-                        </a>
+        <div id="main_container" class="flex_center">
+            <!-- division for the content in the middle of the page -->
+            <div id="hint_box">
+                <button class="button areaB" id="rollButton" onclick="roll()">
+                    <!-- this makes the parent div clickable -->
+                </button>
+                <div id="info_square" class="flex_center">
+                    <div> <!-- a div to hold the text together in the center -->
+                        <div class="t1">Roll the Dice!</div>
+                        <div class="t3">(Press the dice to roll)</div>
                     </div>
                 </div>
             </div>
+            <div id="dice">
+                <div id="placeholder_dice">
+                    "A Dice"
+                    <!-- placeholder dice -->
+                </div>
+            </div>
+            <div id="sWindow" class="">
+                <div class="close flex_center">
+                    <!--
+                    Button for closing pages.
+                    When clicked, the "active"-class is removed from the element's parent-parent
+                    -->
+                    <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
+                    <i class="material-icons" style="font-size:36px">close</i>
+                </div>
+                <div> <!-- an extra/unused div? -->
+                    <div id="sTitle" class="t1">Test</div>
+                    <div class=""> <!-- unused? -->
+                        <div class="">
+                            <a href="#" id="sLink" target="_blank" class="noLinkDecor">
+                                <div class="sLinkContent">
+                                    <img id="sImg" src="" alt="Picture of dish">
+                                    <div id="sText" class="h3"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- everything on the suggestion-page goes here -->
+            </div>
+            <div id="light"></div>
+            <div id="background_closeBox" onclick="closeActive()"></div>
         </div>
     </div>
 </div>
 
+<!--language=JS-->
 <script>
-    document.addEventListener("click", e => {
-        const isDropdownButton = e.target.matches("[data-dropdown-button]")
-        if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return
+    const menu = document.getElementById("side_menu");
+    const menuB = document.getElementById("greySquare");
+    const Filter = document.getElementById("Filter");
+    const Log = document.getElementById("Log");
+    const Settings = document.getElementById("Settings");
 
-        //holder den aktive siden åpen
-        let currentDropdown
-        if (isDropdownButton) {
-            currentDropdown = e.target.closest("[data-dropdown]")
-            currentDropdown.classList.toggle('active')
-        }
+    const sWindow = document.getElementById("sWindow");
+    const sTitle = document.getElementById("sTitle");
+    const sLink = document.getElementById("sLink");
+    const sImg = document.getElementById("sImg");
+    const sText = document.getElementById("sText");
 
-        //lukker alle andre menyer
-        document.querySelectorAll("[data-dropdown].active").forEach(dropdown => {
-            if (dropdown === currentDropdown) return
-            dropdown.classList.remove('active')
-        })
-    })  //slutt på addEventListener
+    const check1 = document.getElementById("gluten")
+    const check2 = document.getElementById("vegetarian")
 
-
-    //generates a random number, without immediate repeat
+    let numberX = 0;
     let previousNumber = 0;
-    let rolling = false     //rulle-prosessen skal gjøre seg ferdig før en ny prosess kan starte
+    let CanRoll = true;     //The roll-process must finish before a new process can begin
+    let pick = 0; //from 0 to 3 -represents All/Glut/Veg/both?
+    let prevPage = sWindow; //prevent pageToggle() from returning error after first use.
+
+    function menuToggle() {
+        menu.classList.add('active')
+        menuB.classList.add('clicked')
+        setTimeout(function() {
+            menuB.classList.remove('clicked')
+        }, 100);
+    }
+    function pageToggle(pageX) {    //function for opening the menu-page corresponding to the button pressed.
+        pageX.classList.add('active')
+        if (pageX == prevPage) {
+           return;    //in case the same menu-page is opened twice, nothing will be closed.
+        } else {
+            prevPage.classList.remove('active');    //closes any additional menu-page currently open
+            prevPage = pageX
+        }
+    }
+    function closeActive() {    //function for closing all sub-pages when called
+        menu.classList.remove('active')
+        sWindow.classList.remove('active')
+        Filter.classList.remove('active')
+        Log.classList.remove('active')
+        Settings.classList.remove('active')
+    }
+    function pickPref() {
+        console.log(check1)
+        //function for selecting preference
+        if (!check1.checked && !check2.checked) {
+            pick = 0
+        } else if (check1.checked && !check2.checked) {
+            pick = 1
+        } else if (!check1.checked && check2.checked) {
+            pick = 2
+        } else {
+            pick = 0    //should be 3, but is 0 temporarily
+        }
+        //if 1 and 2 is false -> all
+        //if 1 -> gluten
+        //if 2 -> vegan
+        //if 1 and 2 is true -> both
+    }
 
     function roll() {
-        if (rolling === false) {
-            rolling = true
-            let numberX = Math.floor(Math.random() * 11) //normalt 11
-            if (numberX == previousNumber) {
-                numberX = Math.floor(Math.random() * 11) //normalt 11
+        pickPref()
+        closeActive()   //calls the function to close all active windows
+        if (CanRoll === true) {
+            CanRoll = false
+            let mathLength = fetchData[pick].length;    //defines the max number for the number generator
+            numberX = Math.floor(Math.random() * mathLength)
+            if (numberX == previousNumber) {        //if numberX is the same as previous number, roll again
+                numberX = Math.floor(Math.random() * mathLength)
                 previousNumber = numberX
-                //console.log(numberX, "reroll");
                 showMenu(numberX);
             } else {
                 previousNumber = numberX
-                //console.log(numberX);
                 showMenu(numberX);
             }
         }
     }
 
     function showMenu(numberX) {
-        //console.log(numberX, "recived");
-        let jsonUrl = "Suggestions/" + numberX +".json";
-        let sMenu = document.getElementById("suggestion");
-        let sImg = document.getElementById("sImg");
-        let sLink1 = document.getElementById("sLink1");
-        let sLink1Text = document.getElementById("sLink1Text");
-        let sLink1Img = document.getElementById("sLink1Img");
+        sTitle.innerText = fetchData[pick][numberX].Title;
+        sLink.href = fetchData[pick][numberX].Link;
+        sImg.src = fetchData[pick][numberX].Img;
+        sText.innerText = fetchData[pick][numberX].Text;
 
-        let sLink2 = document.getElementById("sLink2");
-        let sLink2Text = document.getElementById("sLink2Text");
-        let sLink2Img = document.getElementById("sLink2Img");
 
-        let sLink3 = document.getElementById("sLink3");
-        let sLink3Text = document.getElementById("sLink3Text");
-        let sLink3Img = document.getElementById("sLink3Img");
-
-        let sLink4 = document.getElementById("sLink4");
-        let sLink4Text = document.getElementById("sLink4Text");
-        let sLink4Img = document.getElementById("sLink4Img");
-
-        //JSON = JavaScript Object Notations
-        fetch(jsonUrl)
-        .then(response => response.json())
-        .then(data => {
-            //console.log(data)
-            sMenu.innerText = data.titel
-            sImg.src = data.img
-
-            sLink1.href = data.link1
-            sLink1Img.src = data.link1Img
-            sLink1Text.innerText = data.link1Text
-
-            sLink2.href = data.link2
-            sLink2Img.src = data.link2Img
-            sLink2Text.innerText = data.link2Text
-
-            sLink3.href = data.link3
-            sLink3Img.src = data.link3Img
-            sLink3Text.innerText = data.link3Text
-
-            sLink4.href = data.link4
-            sLink4Img.src = data.link4Img
-            sLink4Text.innerText = data.link4Text
-
-            setTimeout(function(){
-                sMenu.parentNode.classList.toggle('active')
-                rolling = false
-            }, 1000);
-        })
-        .catch(function (err) {
-	    console.warn('Something went wrong.', err);
-        });
-        rolling = false
+        setTimeout(function() {
+            sWindow.classList.add('active')
+            CanRoll = true
+        }, 1000);
     }
+
+// Following code is inspired/borrowed from:
+// George, M. (2021, 3. mai). How to do multiple fetch requests in parallel using JavaScript? [Blogginnlegg].
+// Retrieved 14. December 2021 from https://melvingeorge.me/blog/do-multiple-fetch-requests-parallel-javascript
+
+    const All = fetch('Suggestions/All.json')
+    .then(response => response.json());
+    const Glut = fetch('Suggestions/GlutenFree.json')
+    .then(response => response.json());
+    const Veg = fetch('Suggestions/Vegetarian.json')
+    .then(response => response.json());
+    //const Both = fetch('Suggestions/Both.json')
+    //.then(response => response.json());
+    const allData = Promise.all([All, Glut, Veg]);   // using Promise.all() to get all data before continuing
+
+    allData.then(data => {
+        fetchData = data;
+        CanRoll = true
+    })
+    .catch(function (err) {
+	    console.warn('Something went wrong when fetching suggestions.', err);
+    });
 
 </script>
 </body>
