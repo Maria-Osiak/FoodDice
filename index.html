@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!--
     Links to scalable vector icons.
+    Font Awesome Icons and Google Icons.
     Retrieved from https://www.w3schools.com/icons/icons_reference.asp
     -->
     <style>
@@ -223,6 +224,21 @@
             padding: 10px;
             border-radius: 0 0 5px 5px;
         }
+        #log_msg {
+            position: relative;
+            text-align: center;
+            opacity: 1;
+            margin-top: 15%;
+            min-margin-top: 15px;
+        }
+        .log_msg_cont > .t2 {
+            margin-left: 0px;
+            margin-bottom: 35px;
+        }
+        #log_msg.hidden {
+            opacity: 0;
+        }
+
 
         /*---- buttons ----*/
         .button {
@@ -358,7 +374,7 @@
                     </div>
                 </div>
             </div>
-            <div id="Log" class="menu_page">
+            <div id="Log" class="menu_page active">
                 <div class="close flex_center">
                     <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
                     <i class="material-icons" style="font-size:36px">close</i>
@@ -366,13 +382,18 @@
                 <div class="menu_head">
                     <div class="t2">Log</div>
                 </div>
-                <div class="flex_center">
-                    <div>
-                        <div>Your log is empty.</div>
-                        <div>When you roll the dice, your<br>
-                            results will appear here.</div>
+                <div id="log_msg" class="">
+                    <!-- display for message when log is empty -->
+                    <div class="flex_center">
+                        <div class="log_msg_cont">
+                            <i class="material-icons" style="font-size:40px; color: #1B3B57;">storage</i>
+                            <div class="t2">Your log is empty</div>
+                            <div class="t3">When you roll the dice, your <br>
+                                results will appear here.</div>
+                        </div>
                     </div>
                 </div>
+
             </div>
             <div id="Settings" class="menu_page">
                 <div class="close flex_center">
