@@ -202,5 +202,29 @@
     "Link": "https://www.rema.no/oppskrifter/pizza/pizza-med-pepperoni/",
     "Img": "https://wwwremaprodstorage.blob.core.windows.net/sys-master-hyb-prod/hb6/hba/8824276615198/rec_35916_pizzamargherita_pepperoni_crop_40157_tif_w1280hq75",
     "Text": "Recipe from Rema.no"
+  },
+  {
+    "Title": "Trout with cream stewed vegetables",
+    "Link": "https://www.matprat.no/oppskrifter/familien/orret-med-flotestuede-gronnsaker/",
+    "Img": "https://images.matprat.no/rxknh6kzvg-jumbotron/mobile",
+    "Text": "Recipe from Matprat.no"
+  },
+  {
+    "Title": "Halloumi stuffed peppers recipe",
+    "Link": "https://realfood.tesco.com/recipes/halloumi-stuffed-peppers.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-Halloumi-stuffed-peppers-52237cc7-0e49-40fe-925b-dda9f00ea53c-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
+  },
+  {
+    "Title": "Fajita-stuffed peppers recipe",
+    "Link": "https://realfood.tesco.com/recipes/fajita-stuffed-peppers.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-FajitaStuffedPeppers-af027f71-86ad-44ae-a0ba-442be22aa019-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
+  },
+  {
+    "Title": "Smoky egg-stuffed mushrooms recipe",
+    "Link": "https://realfood.tesco.com/recipes/smoky-egg-stuffed-mushrooms.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-Smoky-egg-stuffed-mushrooms-9d5d144e-8c41-47d1-9061-350747105571-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
   }
 ]

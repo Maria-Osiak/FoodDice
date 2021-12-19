@@ -1,14 +1,8 @@
 [
   {
     "Title": "Vegetarian Lasagna",
-    "Link": "https://meny.no/oppskrifter/vegetar/vegetarlasagne-med-vegetardeig/",
+    "link": "https://meny.no/oppskrifter/vegetar/vegetarlasagne-med-vegetardeig/",
     "Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/sejtfdiyuigat2g1f8tp/vegetarlasagne-med-vegetardeig",
-    "Text": "Recipe from Meny.no"
-  },
-  {
-    "Title": "Vegetarian Hamburger",
-    "Link": "https://meny.no/oppskrifter/vegetar/burger/saftig-vegetarburger-med-aioli/",
-    "Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/m80twccz8nzyzjt41nvx/saftig-vegetarburger-med-aioli",
     "Text": "Recipe from Meny.no"
   },
   {

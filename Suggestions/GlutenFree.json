@@ -1,20 +1,98 @@
 [
   {
-    "Title": "Glutenfree?",
-    "Link": "https://meny.no/oppskrifter/vegetar/vegetarlasagne-med-vegetardeig/",
-    "Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/sejtfdiyuigat2g1f8tp/vegetarlasagne-med-vegetardeig",
+    "Title": "Trout with cream stewed vegetables",
+    "Link": "https://www.matprat.no/oppskrifter/familien/orret-med-flotestuede-gronnsaker/",
+    "Img": "https://images.matprat.no/rxknh6kzvg-jumbotron/mobile",
+    "Text": "Recipe from Matprat.no"
+  },
+  {
+    "Title": "Quinoa-salad with avocado",
+    "Link": "https://www.matprat.no/oppskrifter/sunn/quinoasalat-med-avokado/",
+    "Img": "https://images.matprat.no/endfxpt48m-jumbotron/large",
+    "Text": "Recipe from Matprat.no"
+  },
+  {
+    "Title": "Quinoa-salad with mango and chili",
+    "Link": "https://meny.no/oppskrifter/Gronnsaker/Quinoasalat-med-koriander-mango-og-chili/",
+    "Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/zlei2qmmbqa2xknme8g7/quinoasalat-med-koriander-mango-og-chili",
     "Text": "Recipe from Meny.no"
   },
   {
-    "Title": "Glutenfree testburger",
-    "Link": "https://meny.no/oppskrifter/vegetar/burger/saftig-vegetarburger-med-aioli/",
-    "Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/m80twccz8nzyzjt41nvx/saftig-vegetarburger-med-aioli",
+    "Title": "Quinoa-salad with roastbiff",
+    "Link": "https://www.matprat.no/oppskrifter/kos/quinoasalat-med-roastbiff/",
+    "Img": "https://images.matprat.no/4cffa2b55aecc6753f410800-jumbotron/mobile",
+    "Text": "Recipe from Matprat.no"
+  },
+  {
+    "Title": "Chicken-salad with quinoa and avocado",
+    "Link": "https://www.tine.no/oppskrifter/middag-og-hovedretter/kylling-og-fjarkre/kyllingsalat-med-quinoa-og-avokado",
+    "Img": "https://www.tine.no/_/recipeimage/w_640%2Ch_360%2Cc_fill%2Cx_1500%2Cy_937%2Cg_xy_center/recipeimage/357809.jpg",
+    "Text": "Recipe from Tine.no"
+  },
+  {
+    "Title": "Gluten free tacos",
+    "Link": "https://www.glutenfreepalate.com/gluten-free-tacos/",
+    "Img": "https://www.glutenfreepalate.com/wp-content/uploads/2020/09/Gluten-Free-Tacos-1.2-768x1152.jpg.webp",
+    "Text": "Recipe from glutenfreepalate.com"
+  },
+  {
+    "Title": "Gluten-free pizza crust",
+    "Link": "https://www.glutenfreepalate.com/gluten-free-pizza-9-ingredients/",
+    "Img": "https://www.glutenfreepalate.com/wp-content/uploads/2018/08/Gluten-Free-Pizza-3.2-768x508.jpg",
+    "Text": "Recipe from glutenfreepalate.com"
+  },
+  {
+    "Title": "Tomato Soup with yoghurt",
+    "Link": "https://www.tine.no/oppskrifter/middag-og-hovedretter/supper/tomatsuppe-med-yoghurt",
+    "Img": "https://www.tine.no/_/recipeimage/w_1600%2Ch_900%2Cc_fill%2Cx_1500%2Cy_1000%2Cg_xy_center/recipeimage/320473.jpg",
+    "Text": "Recipe from Tine.no"
+  },
+  {
+    "Title": "Tomato Soup with Egg",
+    "Link": "https://www.matprat.no/oppskrifter/familien/tomatsuppe-med-kokt-egg/",
+    "Img": "https://images.matprat.no/unraqe5xjj-jumbotron/mobile",
+    "Text": "Recipe from Matprat.no"
+  },
+  {
+    "Title": "Tomato Soup",
+    "Link": "https://meny.no/oppskrifter/Supper/Hjemmelaget-tomatsuppe/",
+    "Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_650/h3iu0dtahtgpbwwitew7/hjemmelaget-tomatsuppe",
     "Text": "Recipe from Meny.no"
   },
   {
-    "Title": "Glutenfree banana",
-    "Link": "https://meny.no/oppskrifter/vegetar/burger/saftig-vegetarburger-med-aioli/",
-    "Img": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_420/m80twccz8nzyzjt41nvx/saftig-vegetarburger-med-aioli",
-    "Text": "Recipe from Meny.no"
+    "Title": "Gluten-free Pad Thai",
+    "Link": "https://realfood.tesco.com/recipes/gluten-free-pad-thai.html",
+    "Img": "https://realfood.tesco.com/media/images/303-glutenfree-pad-thai-4e9022f0-f139-4684-8352-d13f0cd4a071-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
+  },
+  {
+    "Title": "Beetroot-marinated salmon with horseradish cream recipe",
+    "Link": "https://realfood.tesco.com/recipes/beetroot-marinated-salmon-with-horseradish-cream.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-BeetrootMarinatedSalmon-5278b3aa-00ec-42e5-ad19-4092bf44ec02-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
+  },
+  {
+    "Title": "Scallop risotto recipe",
+    "Link": "https://realfood.tesco.com/recipes/scallop-risotto.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-Risotto-c48d7dfb-ca25-4a7c-a6b1-18c7cc404da0-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
+  },
+  {
+    "Title": "Halloumi stuffed peppers recipe",
+    "Link": "https://realfood.tesco.com/recipes/halloumi-stuffed-peppers.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-Halloumi-stuffed-peppers-52237cc7-0e49-40fe-925b-dda9f00ea53c-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
+  },
+  {
+    "Title": "Fajita-stuffed peppers recipe",
+    "Link": "https://realfood.tesco.com/recipes/fajita-stuffed-peppers.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-FajitaStuffedPeppers-af027f71-86ad-44ae-a0ba-442be22aa019-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
+  },
+  {
+    "Title": "Smoky egg-stuffed mushrooms recipe",
+    "Link": "https://realfood.tesco.com/recipes/smoky-egg-stuffed-mushrooms.html",
+    "Img": "https://realfood.tesco.com/media/images/1400x919-Smoky-egg-stuffed-mushrooms-9d5d144e-8c41-47d1-9061-350747105571-0-1400x919.jpg",
+    "Text": "Recipe from Tesco"
   }
 ]
