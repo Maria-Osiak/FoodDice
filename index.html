@@ -96,6 +96,14 @@
             max-height: 310px;
             display: flex;
         }
+        #hint_box:hover {
+            filter: brightness(0.90);
+        }
+        #hint_box:active {
+            filter: brightness(0.80);
+        }
+
+
         #info_square {
             height: 80px;
             width: 240px;
@@ -107,12 +115,25 @@
         #dice {
             z-index: 1;
         }
+        #dice.rolling {
+            animation: roll 1100ms ease-out 0s infinite;    /*specifies the name, duration, ease-function, delay and how many times the animation will repeat*/
+        }
         #placeholder_dice {
             height: 140px;
             width: 140px;
             background-color: #A0A0A0;
         }
-
+        @keyframes roll {
+            0% {
+            transform:rotate(0deg);
+            }
+            75% {
+            transform:rotate(720deg);
+            }
+            100% {  /*between 75% and 100% will act as a delay before keyframes repeats*/
+            transform:rotate(720deg);
+            }
+        }
 
         #light {
             z-index: 1;
@@ -469,7 +490,7 @@
                     </div>
                 </div>
             </div>
-            <div id="dice">
+            <div id="dice" class="">
                 <div id="placeholder_dice">
                     "A Dice"
                     <!-- placeholder dice -->
@@ -501,6 +522,7 @@
 <script>
     const menu = document.getElementById("side_menu");
     const menuB = document.getElementById("greySquare");
+    const dice = document.getElementById("dice");
     const Filter = document.getElementById("Filter");
     const Log = document.getElementById("Log");
     const Settings = document.getElementById("Settings");
@@ -544,7 +566,6 @@
         Settings.classList.remove('active')
     }
     function pickPref() {
-        console.log(check1)
         //function for selecting preference
         if (!check1.checked && !check2.checked) {
             pick = 0
@@ -566,6 +587,7 @@
         closeActive()   //calls the function to close all active windows
         if (CanRoll === true) {
             CanRoll = false
+            dice.classList.add('rolling')   //makes dice spin
             let mathLength = fetchData[pick].length;    //defines the max number for the number generator
             numberX = Math.floor(Math.random() * mathLength)
             if (numberX == previousNumber) {        //if numberX is the same as previous number, roll again
@@ -589,6 +611,7 @@
         setTimeout(function() {
             sWindow.classList.add('active')
             CanRoll = true
+            dice.classList.remove('rolling')    //stops dice from continously spinning
         }, 1000);
     }
 
