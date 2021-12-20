@@ -96,6 +96,14 @@
             max-height: 310px;
             display: flex;
         }
+        #hint_box:hover {
+            filter: brightness(0.90);
+        }
+        #hint_box:active {
+            filter: brightness(0.80);
+        }
+
+
         #info_square {
             height: 80px;
             width: 240px;
@@ -107,12 +115,25 @@
         #dice {
             z-index: 1;
         }
+        #dice.rolling {
+            animation: roll 1100ms ease-out 0s infinite;    /*specifies the name, duration, ease-function, delay and how many times the animation will repeat*/
+        }
         #placeholder_dice {
             height: 140px;
             width: 140px;
             background-color: #A0A0A0;
         }
-
+        @keyframes roll {
+            0% {
+            transform:rotate(0deg);
+            }
+            75% {
+            transform:rotate(720deg);
+            }
+            100% {  /*between 75% and 100% will act as a delay before keyframes repeats*/
+            transform:rotate(720deg);
+            }
+        }
 
         #light {
             z-index: 1;
@@ -140,11 +161,14 @@
         .t3 {
             font-size: 16px;            /*font-size for text 3*/
         }
+
+
         #sWindow {                      /*suggestionWindow*/
             z-index: 5;
             position: absolute;
             height: 90vh;               /*window is 90% of viewport height*/
             width: 90vw;
+            max-width: 900px;
             background-color: #FFFFFF;
             opacity: 0;                 /*makes the element invisible*/
             pointer-events: none;       /*element is not interactive*/
@@ -160,12 +184,32 @@
             transform: translateY(0);   /*moves the element to its normal position*/
             pointer-events: auto;       /*makes the element interactive */
         }
+        #sWindow > .close {
+            z-index: 2;
+            position: absolute;
+            right: 5px;
+        }
+        #sTitle {
+            margin-bottom: 10px;
+            border-bottom: 1px solid grey;
+        }
         #sLink {
             text-decoration: none;
             color: #000;
         }
+        #sLink:hover {
+            filter: brightness(0.90);
+        }
+        #sLink:active {
+            filter: brightness(0.80);
+        }
         #sImg {
+            position: relative;
             width: 100%;
+            height: 400px;
+            object-fit: cover;
+            margin: 10px auto;
+            background-color: #D2D2D2;
             border-radius: .25rem;
         }
         #side_menu_pages {
@@ -173,11 +217,14 @@
             width: inherit;
             position: absolute;
         }
+
+
         .menu_page {
             z-index: 5;
             position: absolute;
             height: 90vh;
             width: 90vw;
+            max-width: 700px;
             background-color: #FFFFFF;
             opacity: 0;
             pointer-events: none;
@@ -202,25 +249,22 @@
             display: flex;
             align-items: center;
         }
-        .menu_content {
-            height: inherit;
-            width: inherit;
-        }
         .menu_box {
             margin: 15px 0;
             border-radius: 5px;
-            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
         }
         .box_top {
-            height: ;
+            height: 30px;
             width: inherit;
             font-size: 20px;
             padding-left: 10px;
             background-color: #DADADA;
             border-radius: 5px 5px 0 0;
+            display: flex;
+            align-items: center;
         }
         .box_content {
-            height: 80px;
+            height: 50px;
             padding: 10px;
             border-radius: 0 0 5px 5px;
         }
@@ -290,7 +334,11 @@
             filter: brightness(0.80);
         }
         /*---- buttons ----*/
-        /* Remove tap highlight on iOS */
+
+        /*
+        Remove tap highlight on iOS.
+        Retrieved from https://css-tricks.com/snippets/css/remove-gray-highlight-when-tapping-links-in-mobile-safari/
+        */
         input,
         textarea,
         button,
@@ -442,14 +490,15 @@
                     </div>
                 </div>
             </div>
-            <div id="dice">
+            <div id="dice" class="">
                 <div id="placeholder_dice">
                     "A Dice"
                     <!-- placeholder dice -->
                 </div>
             </div>
             <div id="sWindow" class="">
-                <div class="close flex_center">
+                <!-- everything on the suggestion-page goes here -->
+                <div class="sClose close flex_center">
                     <!--
                     Button for closing pages.
                     When clicked, the "active"-class is removed from the element's parent-parent
@@ -457,20 +506,11 @@
                     <button class="button areaB" onclick="this.parentNode.parentNode.classList.remove('active')"></button>
                     <i class="material-icons" style="font-size:36px">close</i>
                 </div>
-                <div> <!-- an extra/unused div? -->
-                    <div id="sTitle" class="t1">Test</div>
-                    <div class=""> <!-- unused? -->
-                        <div class="">
-                            <a href="#" id="sLink" target="_blank" class="noLinkDecor">
-                                <div class="sLinkContent">
-                                    <img id="sImg" src="" alt="Picture of dish">
-                                    <div id="sText" class="h3"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- everything on the suggestion-page goes here -->
+                <a href="#" id="sLink" target="_blank" class="noLinkDecor">
+                    <img id="sImg" src="" alt="Picture of dish">
+                    <div id="sTitle" class="t1 sTitle">Title</div>
+                    <div id="sText" class="t3">Text</div>
+                </a>
             </div>
             <div id="light"></div>
             <div id="background_closeBox" onclick="closeActive()"></div>
@@ -482,6 +522,7 @@
 <script>
     const menu = document.getElementById("side_menu");
     const menuB = document.getElementById("greySquare");
+    const dice = document.getElementById("dice");
     const Filter = document.getElementById("Filter");
     const Log = document.getElementById("Log");
     const Settings = document.getElementById("Settings");
@@ -525,7 +566,6 @@
         Settings.classList.remove('active')
     }
     function pickPref() {
-        console.log(check1)
         //function for selecting preference
         if (!check1.checked && !check2.checked) {
             pick = 0
@@ -534,7 +574,7 @@
         } else if (!check1.checked && check2.checked) {
             pick = 2
         } else {
-            pick = 0    //should be 3, but is 0 temporarily
+            pick = 3
         }
         //if 1 and 2 is false -> all
         //if 1 -> gluten
@@ -547,6 +587,7 @@
         closeActive()   //calls the function to close all active windows
         if (CanRoll === true) {
             CanRoll = false
+            dice.classList.add('rolling')   //makes dice spin
             let mathLength = fetchData[pick].length;    //defines the max number for the number generator
             numberX = Math.floor(Math.random() * mathLength)
             if (numberX == previousNumber) {        //if numberX is the same as previous number, roll again
@@ -570,6 +611,7 @@
         setTimeout(function() {
             sWindow.classList.add('active')
             CanRoll = true
+            dice.classList.remove('rolling')    //stops dice from continously spinning
         }, 1000);
     }
 
@@ -583,9 +625,9 @@
     .then(response => response.json());
     const Veg = fetch('Suggestions/Vegetarian.json')
     .then(response => response.json());
-    //const Both = fetch('Suggestions/Both.json')
-    //.then(response => response.json());
-    const allData = Promise.all([All, Glut, Veg]);   // using Promise.all() to get all data before continuing
+    const Both = fetch('Suggestions/Both.json')
+    .then(response => response.json());
+    const allData = Promise.all([All, Glut, Veg, Both]);   // using Promise.all() to get all data before continuing
 
     allData.then(data => {
         fetchData = data;
